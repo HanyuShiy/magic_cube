@@ -8,4 +8,5 @@ add_executable(magic_cube
         angle.cpp
         colored_cubelet.cpp
         cube.cpp
-        face.cpp)
+        face.cpp
+        cubelet.cpp)
