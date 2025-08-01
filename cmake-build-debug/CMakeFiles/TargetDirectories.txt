@@ -1,0 +1,3 @@
+/Users/hanyushi/code/magic_cube/cmake-build-debug/CMakeFiles/magic_cube.dir
+/Users/hanyushi/code/magic_cube/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/hanyushi/code/magic_cube/cmake-build-debug/CMakeFiles/rebuild_cache.dir

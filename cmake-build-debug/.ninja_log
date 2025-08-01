@@ -1,0 +1,6 @@
+# ninja log v6
+12	1465	1754060375413139436	CMakeFiles/magic_cube.dir/main.cpp.o	ae0e5ca6d17f3657
+1466	1566	1754060376867161180	magic_cube	8f92af4969273a7
+10	80	1754060098684778972	CMakeFiles/magic_cube.dir/colored_cubelet.cpp.o	680cd9e160bc0bba
+9	77	1754060098684426983	CMakeFiles/magic_cube.dir/angle.cpp.o	357d75fba4660fab
+13	1451	1754060375414001158	CMakeFiles/magic_cube.dir/cube.cpp.o	94a92b339c4b3287
