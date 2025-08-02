@@ -1,6 +1,5 @@
 #include <iostream>
 #include "cube.h"
-#include "colored_cubelet.h"
 
 int main()
 {
@@ -8,9 +7,9 @@ int main()
     auto bottom = cube.getBottom();
     std::cout << "bottom face before:\n";
     bottom.print();
-    cube.rotateFrontClockwise();
-    std::cout << "bottom face after:\n";
-    cube.getBottom().print();
+    // cube.rotateFrontClockwise();
+    // std::cout << "bottom face after:\n";
+    // cube.getBottom().print();
 
     return 0;
 }

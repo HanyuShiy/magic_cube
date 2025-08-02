@@ -1,7 +1,3 @@
-//
-// Created by Hanyu Shi on 02.08.25.
-//
-
 #ifndef COLOR_H
 #define COLOR_H
 

@@ -5,14 +5,6 @@ int Angle::normalize(const int angle)
     return angle < 0 ? angle % 4 + 4 : angle % 4;
 }
 
-bool Angle::operator==(const Angle other)
-{
-    if (*this == other)
-    {
-        return true;
-    }
-}
-
 Angle::Angle(const int value) : value(normalize(value))
 {
 }

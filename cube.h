@@ -1,9 +1,6 @@
-#pragma once
-
-#include "colored_cubelet.h"
 #include "face.h"
 
-class Cube :
+class Cube
 {
 public:
     ColoredCubelet cubelets[26];

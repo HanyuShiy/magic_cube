@@ -1,4 +1,3 @@
-#pragma once
 #include "angle.h"
 
 class Position
@@ -15,9 +14,9 @@ class Position
 public:
     int x, y, z;
 
-    Position(const int x, const int y, const int z);
+    Position(int x, int y, int z);
 
-    Position rotateX(const Angle angle) const;
-    Position rotateY(const Angle angle) const;
-    Position rotateZ(const Angle angle) const;
+    Position rotateX(Angle angle) const;
+    Position rotateY(Angle angle) const;
+    Position rotateZ(Angle angle) const;
 };

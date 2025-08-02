@@ -1,28 +1,23 @@
-#pragma once
-
 #include <array>
-#include <vector>
 
 #include "color.h"
 #include "cubelet.h"
+#include "orientation.h"
 
 class CubeletFace
 {
+public:
     Color color;
 
     Orientation orientation;
 
-public:
     CubeletFace(const Orientation& orientation)
         : color(Color::EMPTY),
           orientation(orientation)
     {
     }
 
-    void coloring(const Color color)
-    {
-        this->color = color;
-    }
+    void coloring(Color color);
 };
 
 class ColoredCubelet : public Cubelet
@@ -33,7 +28,9 @@ public:
 
     ColoredCubelet(int x, int y, int z);
 
-    Color coloringCubelet(std::vector<bool> on_surfaces);
+    void coloring(Orientation orientation, Color color);
 
     void rotateColorXClockwise();
+
+    Color getFaceOn(Orientation orientation) const;
 };

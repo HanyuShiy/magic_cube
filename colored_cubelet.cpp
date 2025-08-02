@@ -1,5 +1,10 @@
 #include "colored_cubelet.h"
 
+void CubeletFace::coloring(const Color color)
+{
+    this->color = color;
+}
+
 ColoredCubelet::ColoredCubelet(const int x, const int y, const int z):
     Cubelet(x, y, z),
     faces{
@@ -15,13 +20,15 @@ ColoredCubelet::ColoredCubelet(const int x, const int y, const int z):
 {
 }
 
-Color ColoredCubelet::coloringCubelet(std::vector<bool> on_surfaces)
+void ColoredCubelet::coloring(const Orientation orientation, const Color color)
 {
-    if (on_surfaces)
+    for (auto& face : faces)
     {
-        // wip...
+        if (face.orientation == orientation)
+        {
+            face.coloring(color);
+        }
     }
-
 }
 
 void ColoredCubelet::rotateColorXClockwise()
@@ -29,4 +36,14 @@ void ColoredCubelet::rotateColorXClockwise()
     rotateXClockwise();
 }
 
-
+Color ColoredCubelet::getFaceOn(const Orientation orientation) const
+{
+    for (auto face : faces)
+    {
+        if (face.orientation == orientation)
+        {
+            return face.color;
+        }
+    }
+    throw;
+}

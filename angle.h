@@ -11,11 +11,11 @@ public:
 
     explicit Angle(int value);
 
-    Angle add(const Angle other) const;
+    Angle add(Angle other) const;
 
-    static int cos(Angle const angle);
+    static int cos(Angle angle);
 
-    static int sin(Angle const angle);
+    static int sin(Angle angle);
 };
 
 const auto ANGLE_ZERO = Angle{0};
