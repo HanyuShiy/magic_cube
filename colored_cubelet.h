@@ -1,22 +1,39 @@
 #pragma once
 
+#include <array>
+#include <vector>
+
+#include "color.h"
 #include "cubelet.h"
 
-enum Color
+class CubeletFace
 {
-    RED = 'R',
-    GREEN = 'G',
-    BLUE = 'B',
-    YELLOW = 'Y',
-    ORANGE = 'O',
-    WHITE = 'W',
-    EMPTY = ' '
+    Color color;
+
+    Orientation orientation;
+
+public:
+    CubeletFace(const Orientation& orientation)
+        : color(Color::EMPTY),
+          orientation(orientation)
+    {
+    }
+
+    void coloring(const Color color)
+    {
+        this->color = color;
+    }
 };
 
 class ColoredCubelet : public Cubelet
 {
 public:
-    Color front, back, left, right, top, bottom;
+    // CubeletFace faces[6];
+    std::array<CubeletFace, 6> faces;
 
     ColoredCubelet(int x, int y, int z);
+
+    Color coloringCubelet(std::vector<bool> on_surfaces);
+
+    void rotateColorXClockwise();
 };

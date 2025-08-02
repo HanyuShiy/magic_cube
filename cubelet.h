@@ -1,5 +1,6 @@
 #include "position.h"
 #include "orientation.h"
+#include "color.h"
 
 #pragma once
 
@@ -15,11 +16,17 @@ public:
     void rotateYClockwise();
     void rotateZClockwise();
 
-protected:
     bool onFrontFace() const;
     bool onBackFace() const;
     bool onLeftFace() const;
     bool onRightFace() const;
     bool onTopFace() const;
     bool onBottomFace() const;
+
+    virtual Color getFrontFace() const;
+    virtual Color getBackFace() const;
+    virtual Color getLeftFace() const;
+    virtual Color getRightFace() const;
+    virtual Color getTopFace() const;
+    virtual Color getBottomFace() const;
 };

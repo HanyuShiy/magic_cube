@@ -1,6 +1,6 @@
 #include "orientation.h"
 
-Orientation::Orientation(const Angle roll, const Angle pitch, const Angle yaw) : roll(roll), pitch(pitch), yaw(yaw)
+Orientation::Orientation(Angle roll, Angle pitch, Angle yaw) : roll(roll), pitch(pitch), yaw(yaw)
 {
 }
 

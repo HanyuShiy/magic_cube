@@ -3,7 +3,7 @@
 #include "colored_cubelet.h"
 #include "face.h"
 
-class Cube
+class Cube :
 {
 public:
     ColoredCubelet cubelets[26];
@@ -11,10 +11,14 @@ public:
 
     Cube();
 
+    void coloring();
+
     Face getFront();
     Face getBack();
     Face getLeft();
     Face getRight();
     Face getTop();
     Face getBottom();
+
+    void rotateFrontClockwise();
 };

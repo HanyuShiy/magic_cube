@@ -52,3 +52,28 @@ bool Cubelet::onBottomFace() const
 {
     return position.z == -1;
 }
+
+Color Cubelet::getFrontFace() const
+{
+
+}
+
+Color Cubelet::getBackFace() const
+{
+}
+
+Color Cubelet::getLeftFace() const
+{
+}
+
+Color Cubelet::getRightFace() const
+{
+}
+
+Color Cubelet::getTopFace() const
+{
+}
+
+Color Cubelet::getBottomFace() const
+{
+}

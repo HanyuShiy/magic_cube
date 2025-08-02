@@ -34,14 +34,23 @@ Cube::Cube(): cubelets{
 {
 }
 
+void Cube::coloring()
+{
+    for (auto cubelet : cubelets)
+    {
+        cublet
+    }
+
+}
+
 Face Cube::getFront()
 {
     std::array<std::array<Color, 3>, 3> frontFace{};
     for (const auto& cubelet : cubelets)
     {
-        if (cubelet.position.x == 1) // Check if the cubelet is on the front face
+        if (cubelets->onFrontFace()) // Check if the cubelet is on the front face
         {
-            frontFace[cubelet.position.y + 1][cubelet.position.z + 1] = cubelet.front;
+            frontFace[cubelet.position.y + 1][cubelet.position.z + 1] = cubelet.front_o;
         }
     }
     return {frontFace};
@@ -54,7 +63,7 @@ Face Cube::getBack()
     {
         if (cubelet.position.x == -1)
         {
-            backFace[cubelet.position.y + 1][cubelet.position.z + 1] = cubelet.back;
+            backFace[cubelet.position.y + 1][cubelet.position.z + 1] = cubelet.back_o;
         }
     }
     return {backFace};
@@ -67,7 +76,7 @@ Face Cube::getLeft()
     {
         if (cubelet.position.y == 1)
         {
-            leftFace[cubelet.position.x + 1][cubelet.position.z + 1] = cubelet.left;
+            leftFace[cubelet.position.x + 1][cubelet.position.z + 1] = cubelet.left_o;
         }
     }
     return {leftFace};
@@ -80,7 +89,7 @@ Face Cube::getRight()
     {
         if (cubelet.position.y == -1)
         {
-            leftFace[cubelet.position.x + 1][cubelet.position.z + 1] = cubelet.right;
+            leftFace[cubelet.position.x + 1][cubelet.position.z + 1] = cubelet.right_o;
         }
     }
     return {leftFace};
@@ -93,7 +102,7 @@ Face Cube::getTop()
     {
         if (cubelet.position.z == 1)
         {
-            leftFace[cubelet.position.x + 1][cubelet.position.y + 1] = cubelet.top;
+            leftFace[cubelet.position.x + 1][cubelet.position.y + 1] = cubelet.top_o;
         }
     }
     return {leftFace};
@@ -106,8 +115,19 @@ Face Cube::getBottom()
     {
         if (cubelet.position.z == -1)
         {
-            leftFace[cubelet.position.x + 1][cubelet.position.y + 1] = cubelet.bottom;
+            leftFace[cubelet.position.x + 1][cubelet.position.y + 1] = cubelet.bottom_o;
         }
     }
     return {leftFace};
+}
+
+void Cube::rotateFrontClockwise()
+{
+    for (auto& cubelet : cubelets)
+    {
+        if (cubelet.position.x == 1)
+        {
+            cubelet.rotateXClockwise();
+        }
+    }
 }

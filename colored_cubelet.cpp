@@ -2,30 +2,31 @@
 
 ColoredCubelet::ColoredCubelet(const int x, const int y, const int z):
     Cubelet(x, y, z),
-    front(EMPTY), back(EMPTY), left(EMPTY), right(EMPTY), top(EMPTY), bottom(EMPTY)
+    faces{
+        {
+            CubeletFace(FRONT_ORIENTATED),
+            CubeletFace(BACK_ORIENTATED),
+            CubeletFace(TOP_ORIENTATED),
+            CubeletFace(BOTTOM_ORIENTATED),
+            CubeletFace(LEFT_ORIENTATED),
+            CubeletFace(RIGHT_ORIENTATED)
+        }
+    }
 {
-    if (onFrontFace())
-    {
-        front = RED;
-    }
-    if (onBackFace())
-    {
-        back = ORANGE;
-    }
-    if (onLeftFace())
-    {
-        left = GREEN;
-    }
-    if (onRightFace())
-    {
-        right = BLUE;
-    }
-    if (onTopFace())
-    {
-        top = WHITE;
-    }
-    if (onBottomFace())
-    {
-        bottom = YELLOW;
-    }
 }
+
+Color ColoredCubelet::coloringCubelet(std::vector<bool> on_surfaces)
+{
+    if (on_surfaces)
+    {
+        // wip...
+    }
+
+}
+
+void ColoredCubelet::rotateColorXClockwise()
+{
+    rotateXClockwise();
+}
+
+
