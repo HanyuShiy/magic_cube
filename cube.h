@@ -4,7 +4,6 @@ class Cube
 {
 public:
     ColoredCubelet cubelets[26];
-    // constructor to initialize 26 cubelets
 
     Cube();
 
@@ -18,7 +17,11 @@ public:
     Face getBottom();
 
     void rotateFrontClockwise();
+    void rotateBackClockwise();
+    void rotateTopClockwise();
+    void rotateBottomClockwise();
+    void rotateLeftClockwise();
+    void rotateRightClockwise();
 
-    // void rotateClockwise(Orientation face_orientation, Angle angle);
-
+    //void rotateClockwise(Orientation face_orientation, Angle angle);
 };

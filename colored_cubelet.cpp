@@ -52,3 +52,21 @@ void ColoredCubelet::rotateXClockwise()
         face.rotateXClockwise();
     }
 }
+
+void ColoredCubelet::rotateYClockwise()
+{
+    Cubelet::rotateYClockwise();
+    for (auto& face : faces)
+    {
+        face.rotateYClockwise();
+    }
+}
+
+void ColoredCubelet::rotateZClockwise()
+{
+    Cubelet::rotateZClockwise();
+    for (auto& face : faces)
+    {
+        face.rotateZClockwise();
+    }
+}

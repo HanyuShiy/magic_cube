@@ -16,3 +16,15 @@ void CubeletFace::rotateXClockwise()
     const auto afterRotation = this->orientation.rotateX(ONE_STEP_CLOCKWISE);
     this->orientation = afterRotation;
 }
+
+void CubeletFace::rotateYClockwise()
+{
+    const auto afterRotation = this->orientation.rotateY(ONE_STEP_CLOCKWISE);
+    this->orientation = afterRotation;
+}
+
+void CubeletFace::rotateZClockwise()
+{
+    const auto afterRotation = this->orientation.rotateZ(ONE_STEP_CLOCKWISE);
+    this->orientation = afterRotation;
+}

@@ -8,19 +8,16 @@ Cubelet::Cubelet(const int x, const int y, const int z):
 void Cubelet::rotateXClockwise()
 {
     position = position.rotateX(ONE_STEP_CLOCKWISE);
-    // orientation = orientation.rotateX(ONE_STEP_CLOCKWISE);
 }
 
 void Cubelet::rotateYClockwise()
 {
     position = position.rotateY(ONE_STEP_CLOCKWISE);
-    // orientation = orientation.rotateY(ONE_STEP_CLOCKWISE);
 }
 
 void Cubelet::rotateZClockwise()
 {
     position = position.rotateZ(ONE_STEP_CLOCKWISE);
-    // orientation = orientation.rotateZ(ONE_STEP_CLOCKWISE);
 }
 
 bool Cubelet::onFrontFace() const

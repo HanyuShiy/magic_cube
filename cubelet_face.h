@@ -13,4 +13,6 @@ public:
     void coloring(Color color);
 
     void rotateXClockwise();
+    void rotateYClockwise();
+    void rotateZClockwise();
 };

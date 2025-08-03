@@ -19,4 +19,6 @@ public:
     Position getPosition() const;
 
     void rotateXClockwise() override;
+    void rotateYClockwise() override;
+    void rotateZClockwise() override;
 };

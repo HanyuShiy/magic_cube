@@ -148,9 +148,68 @@ void Cube::rotateFrontClockwise()
 {
     for (auto& cubelet : cubelets)
     {
-        if (cubelet.onFrontFace())  // cubelet.position.x=1
+        if (cubelet.onFrontFace()) // cubelet.position.x=1
         {
-            cubelet.rotateXClockwise();  // rotate cubelet.position
+            cubelet.rotateXClockwise(); // rotate cubelet.position
         }
     }
 }
+
+void Cube::rotateBackClockwise()
+{
+    for (auto& cubelet : cubelets)
+    {
+        if (cubelet.onBackFace()) // cubelet.position.x=1
+        {
+            cubelet.rotateXClockwise(); // rotate cubelet.position
+        }
+    }
+}
+
+void Cube::rotateTopClockwise()
+{
+    for (auto& cubelet : cubelets)
+    {
+        if (cubelet.onTopFace()) // cubelet.position.x=1
+        {
+            cubelet.rotateZClockwise(); // rotate cubelet.position
+        }
+    }
+}
+
+void Cube::rotateBottomClockwise()
+{
+    for (auto& cubelet : cubelets)
+    {
+        if (cubelet.onBottomFace()) // cubelet.position.x=1
+        {
+            cubelet.rotateZClockwise(); // rotate cubelet.position
+        }
+    }
+}
+
+void Cube::rotateLeftClockwise()
+{
+    for (auto& cubelet : cubelets)
+    {
+        if (cubelet.onLeftFace()) // cubelet.position.x=1
+        {
+            cubelet.rotateYClockwise(); // rotate cubelet.position
+        }
+    }
+}
+
+void Cube::rotateRightClockwise()
+{
+    for (auto& cubelet : cubelets)
+    {
+        if (cubelet.onRightFace()) // cubelet.position.x=1
+        {
+            cubelet.rotateYClockwise(); // rotate cubelet.position
+        }
+    }
+}
+
+// void Cube::rotateClockwise(Orientation face_orientation, Angle angle)
+// {
+// }
