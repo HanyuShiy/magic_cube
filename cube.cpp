@@ -99,7 +99,7 @@ Face Cube::getLeft()
     {
         if (cubelet.onLeftFace())
         {
-            leftFace[cubelet.position.x + 1][cubelet.position.z + 1] = cubelet.getFaceOn(LEFT_ORIENTATED);
+            leftFace[cubelet.position.z + 1][cubelet.position.x + 1] = cubelet.getFaceOn(LEFT_ORIENTATED);
         }
     }
     return {leftFace};
@@ -148,9 +148,9 @@ void Cube::rotateFrontClockwise()
 {
     for (auto& cubelet : cubelets)
     {
-        if (cubelet.position.x == 1)
+        if (cubelet.onFrontFace())  // cubelet.position.x=1
         {
-            cubelet.rotateXClockwise();
+            cubelet.rotateXClockwise();  // rotate cubelet.position
         }
     }
 }

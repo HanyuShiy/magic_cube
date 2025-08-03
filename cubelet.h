@@ -5,11 +5,7 @@ class Cubelet
 public:
     Position position;
 
-    Cubelet(const int x, const int y, const int z);
-
-    void rotateXClockwise();
-    void rotateYClockwise();
-    void rotateZClockwise();
+    Cubelet(int x, int y, int z);
 
     bool onFrontFace() const;
     bool onBackFace() const;
@@ -17,4 +13,9 @@ public:
     bool onRightFace() const;
     bool onTopFace() const;
     bool onBottomFace() const;
+
+protected:
+    virtual void rotateXClockwise();
+    virtual void rotateYClockwise();
+    virtual void rotateZClockwise();
 };

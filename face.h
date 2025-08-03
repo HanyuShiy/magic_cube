@@ -9,4 +9,5 @@ public:
     Face(const std::array<std::array<Color, 3>, 3>& colors);
 
     void print() const;
+
 };

@@ -12,4 +12,5 @@ add_executable(magic_cube
         cubelet.cpp
         orientation.cpp
         position.cpp
-        color.h)
+        color.h
+        cubelet_face.cpp)

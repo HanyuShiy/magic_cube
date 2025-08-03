@@ -1,24 +1,8 @@
 #include <array>
 
-#include "color.h"
 #include "cubelet.h"
-#include "orientation.h"
+#include "cubelet_face.h"
 
-class CubeletFace
-{
-public:
-    Color color;
-
-    Orientation orientation;
-
-    CubeletFace(const Orientation& orientation)
-        : color(Color::EMPTY),
-          orientation(orientation)
-    {
-    }
-
-    void coloring(Color color);
-};
 
 class ColoredCubelet : public Cubelet
 {
@@ -30,7 +14,9 @@ public:
 
     void coloring(Orientation orientation, Color color);
 
-    void rotateColorXClockwise();
-
     Color getFaceOn(Orientation orientation) const;
+
+    Position getPosition() const;
+
+    void rotateXClockwise() override;
 };

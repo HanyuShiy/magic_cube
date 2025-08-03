@@ -11,7 +11,7 @@ Position Position::rotateX(const Angle angle) const
 {
     // Rotate around X-axis
     const int newY = y * Angle::cos(angle) + z * Angle::sin(angle);
-    const int newZ = y * Angle::sin(angle) - z * Angle::cos(angle);
+    const int newZ = -y * Angle::sin(angle) + z * Angle::cos(angle);
     return {x, newY, newZ};
 }
 
@@ -26,7 +26,7 @@ Position Position::rotateY(const Angle angle) const
 Position Position::rotateZ(const Angle angle) const
 {
     // Rotate around Z-axis
-    const int newY = x * Angle::cos(angle) - y * Angle::sin(angle);
-    const int newX = x * Angle::sin(angle) + y * Angle::cos(angle);
+    const int newY = y * Angle::cos(angle) - x * Angle::sin(angle);
+    const int newX = -y * Angle::sin(angle) + x * Angle::cos(angle);
     return {newX, newY, z};
 }

@@ -18,4 +18,7 @@ public:
     Face getBottom();
 
     void rotateFrontClockwise();
+
+    // void rotateClockwise(Orientation face_orientation, Angle angle);
+
 };

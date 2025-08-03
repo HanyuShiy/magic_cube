@@ -20,5 +20,5 @@ public:
 
 const auto ANGLE_ZERO = Angle{0};
 const auto HALF_ROUND = Angle{2};
-const auto ONE_STEP_CLOCKWISE = Angle{-1}; // -1 for clockwise rotation, -90 degrees
-const auto ONE_STEP_COUNTERCLOCKWISE = Angle{1}; // 1 for counterclockwise rotation, +90 degrees
+const auto ONE_STEP_CLOCKWISE = Angle{1}; // -1 for clockwise rotation, -90 degrees
+const auto ONE_STEP_COUNTERCLOCKWISE = Angle{-1}; // 1 for counterclockwise rotation, +90 degrees
