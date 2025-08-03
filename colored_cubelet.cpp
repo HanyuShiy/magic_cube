@@ -47,9 +47,8 @@ Position ColoredCubelet::getPosition() const
 void ColoredCubelet::rotateXClockwise()
 {
     Cubelet::rotateXClockwise();
-    for (auto face : faces)
+    for (auto& face : faces)
     {
         face.rotateXClockwise();
     }
 }
-

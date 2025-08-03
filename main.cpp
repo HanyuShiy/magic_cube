@@ -4,13 +4,14 @@
 int main()
 {
     auto cube = Cube();
-    const auto bottom = cube.getBottom();
-    std::cout << "bottom face before rotation:\n";
-    bottom.print();
+    // const auto bottom = cube.getBottom();
+    // std::cout << "bottom face before rotation:\n";
+    // bottom.print();
 
     cube.rotateFrontClockwise();
     std::cout << "bottom face after:\n";
-    cube.getBottom().print();
+    const auto B = cube.getBottom();
+    B.print();
     cube.getTop().print();
     cube.getLeft().print();
     cube.getRight().print();
