@@ -210,6 +210,20 @@ void Cube::rotateRightClockwise()
     }
 }
 
+void Cube::rotateClockwise(const Orientation face_orientation, const int steps = 1)
+{
+    for (size_t i = 0; i < steps; ++i)
+    {
+        for (auto& cubelet : cubelets)
+        {
+            if (cubelet.getFaceOn(face_orientation) != EMPTY)
+            {
+                cubelet.rotateAround(face_orientation);
+            }
+        }
+    }
+}
+
 // void Cube::rotateClockwise(Orientation face_orientation, Angle angle)
 // {
 // }

@@ -1,5 +1,14 @@
 #include "cubelet_face.h"
 
+bool CubeletFace::isColored() const
+{
+    if (color != EMPTY)
+    {
+        return true;
+    }
+    return false;
+}
+
 CubeletFace::CubeletFace(const Orientation& orientation):
     color(Color::EMPTY),
     orientation(orientation)

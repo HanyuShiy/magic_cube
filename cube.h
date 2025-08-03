@@ -23,5 +23,6 @@ public:
     void rotateLeftClockwise();
     void rotateRightClockwise();
 
+    void rotateClockwise(Orientation face_orientation, int steps);
     //void rotateClockwise(Orientation face_orientation, Angle angle);
 };

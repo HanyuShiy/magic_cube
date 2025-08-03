@@ -16,9 +16,9 @@ public:
 
     Color getFaceOn(Orientation orientation) const;
 
-    Position getPosition() const;
-
     void rotateXClockwise() override;
     void rotateYClockwise() override;
     void rotateZClockwise() override;
+
+    void rotateAround(Orientation axis);
 };

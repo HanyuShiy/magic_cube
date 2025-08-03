@@ -39,10 +39,6 @@ Color ColoredCubelet::getFaceOn(const Orientation orientation) const
     throw;
 }
 
-Position ColoredCubelet::getPosition() const
-{
-    return Position{this->position.x, this->position.y, this->position.z};
-}
 
 void ColoredCubelet::rotateXClockwise()
 {
@@ -68,5 +64,23 @@ void ColoredCubelet::rotateZClockwise()
     for (auto& face : faces)
     {
         face.rotateZClockwise();
+    }
+}
+
+void ColoredCubelet::rotateAround(const Orientation axis)
+{
+
+
+    if (axis == FRONT_ORIENTATED || axis == BACK_ORIENTATED)
+    {
+        rotateXClockwise();
+    }
+    if (axis == LEFT_ORIENTATED || axis == RIGHT_ORIENTATED)
+    {
+        rotateZClockwise();
+    }
+    if (axis == TOP_ORIENTATED || axis == BOTTOM_ORIENTATED)
+    {
+        rotateZClockwise();
     }
 }

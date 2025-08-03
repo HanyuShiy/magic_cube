@@ -19,4 +19,6 @@ public:
     Position rotateX(Angle angle) const;
     Position rotateY(Angle angle) const;
     Position rotateZ(Angle angle) const;
+
+
 };
