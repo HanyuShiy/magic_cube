@@ -1,5 +1,7 @@
 #include "angle.h"
 
+#pragma once
+
 class Position
 {
     static int normalize(int const value)

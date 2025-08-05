@@ -1,5 +1,6 @@
 #include <iostream>
 #include "cube.h"
+#include "layer.h"
 
 int main()
 {
@@ -8,7 +9,7 @@ int main()
     // std::cout << "bottom face before rotation:\n";
     // bottom.print();
 
-    cube.rotateClockwise(FRONT_ORIENTATED,1);
+    cube.rotateClockwise(FRONT_ORIENTATED, 4);
 
     std::cout << "bottom face after rotation:\n";
     cube.getBottom().print();
@@ -22,5 +23,16 @@ int main()
     cube.getBack().print();
     std::cout << "front face after rotation:\n";
     cube.getFront().print();
+
+    for (auto& cubelet : cube.cubelets)
+    {
+        if (bottomLayer.contains(cubelet))
+            std::cout << cubelet.position.x
+                << cubelet.position.y
+                << cubelet.position.z
+                << "\n";
+    }
+
+
     return 0;
 }

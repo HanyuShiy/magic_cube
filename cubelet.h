@@ -1,5 +1,7 @@
 #include "position.h"
 
+#pragma once
+
 class Cubelet
 {
 public:

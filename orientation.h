@@ -1,5 +1,7 @@
 #include "angle.h"
 
+#pragma once
+
 class Orientation
 {
     int x, y, z;

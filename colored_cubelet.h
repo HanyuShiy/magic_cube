@@ -3,6 +3,7 @@
 #include "cubelet.h"
 #include "cubelet_face.h"
 
+#pragma once
 
 class ColoredCubelet : public Cubelet
 {
