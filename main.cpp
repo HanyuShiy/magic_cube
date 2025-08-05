@@ -26,7 +26,7 @@ int main()
 
     for (auto& cubelet : cube.cubelets)
     {
-        if (bottomLayer.contains(cubelet))
+        if (zN1Layer.contains(cubelet))
             std::cout << cubelet.position.x
                 << cubelet.position.y
                 << cubelet.position.z
