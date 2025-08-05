@@ -1,5 +1,14 @@
 #include "position.h"
 
+int Position::normalize(int const value)
+{
+    if (0 == value)
+    {
+        return 0; // Center position
+    }
+    return value > 0 ? 1 : -1; // Positive direction
+}
+
 Position::Position(const int x, const int y, const int z):
     x(normalize(x)),
     y(normalize(y)),

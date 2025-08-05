@@ -5,6 +5,7 @@
 class Cubelet
 {
 public:
+    virtual ~Cubelet() = default;
     Position position;
 
     Cubelet(int x, int y, int z);

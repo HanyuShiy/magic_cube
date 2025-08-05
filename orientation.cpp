@@ -26,9 +26,5 @@ Orientation Orientation::rotateZ(const Angle angle) const
     return {newX_, newY_, z};
 }
 
-bool Orientation::operator==(const Orientation& that) const
-{
-    return this->x == that.x && this->y == that.y && this->z == that.z;
-}
 
 

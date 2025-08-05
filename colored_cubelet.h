@@ -1,11 +1,12 @@
+#pragma once
+
 #include <array>
 
 #include "cubelet.h"
 #include "cubelet_face.h"
 
-#pragma once
 
-class ColoredCubelet : public Cubelet
+class ColoredCubelet final : public Cubelet
 {
 public:
     // CubeletFace faces[6];

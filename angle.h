@@ -7,18 +7,15 @@ class Angle
 public:
     int value; // Unit pi/2
 
-    bool operator==(Angle other);
-
     explicit Angle(int value);
 
     Angle add(Angle other) const;
 
     static int cos(Angle angle);
-
     static int sin(Angle angle);
 };
 
 const auto ANGLE_ZERO = Angle{0};
 const auto HALF_ROUND = Angle{2};
-const auto ONE_STEP_CLOCKWISE = Angle{1}; // -1 for clockwise rotation, -90 degrees
-const auto ONE_STEP_COUNTERCLOCKWISE = Angle{-1}; // 1 for counterclockwise rotation, +90 degrees
+const auto ONE_STEP_CLOCKWISE = Angle{1};
+const auto ONE_STEP_COUNTERCLOCKWISE = Angle{-1};

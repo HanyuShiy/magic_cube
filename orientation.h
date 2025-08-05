@@ -1,6 +1,6 @@
-#include "angle.h"
-
 #pragma once
+
+#include "angle.h"
 
 class Orientation
 {
@@ -13,7 +13,7 @@ public:
     Orientation rotateY(Angle angle) const;
     Orientation rotateZ(Angle angle) const;
 
-    bool operator==(const Orientation& that) const;
+    bool operator==(const Orientation& that) const = default;
 };
 
 const auto FRONT_ORIENTATED = Orientation{1, 0, 0};

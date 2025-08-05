@@ -1,3 +1,4 @@
+#pragma once
 #include "color.h"
 #include "orientation.h"
 
@@ -10,7 +11,7 @@ public:
 
     bool isColored() const;
 
-    CubeletFace(const Orientation& orientation);
+    explicit CubeletFace(const Orientation& orientation);
 
     void coloring(Color color);
 

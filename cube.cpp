@@ -225,7 +225,3 @@ void Cube::rotateClockwise(const Layer& layer, const int steps)
         }
     }
 }
-
-// void Cube::rotateClockwise(Orientation face_orientation, Angle angle)
-// {
-// }
