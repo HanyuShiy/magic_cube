@@ -220,7 +220,7 @@ void Cube::rotateClockwise(const Layer& layer, const int steps = 1)
         {
             if (layer.contains(cubelet))
             {
-                // cubelet.rotateAround();
+                cubelet.rotateAround(layer.getAxis());
             }
         }
     }
