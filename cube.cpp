@@ -212,7 +212,7 @@ void Cube::rotateRightClockwise()
     }
 }
 
-void Cube::rotateClockwise(const Layer& layer, const int steps = 1)
+void Cube::rotateClockwise(const Layer& layer, const int steps)
 {
     for (size_t i = 0; i < steps; ++i)
     {

@@ -24,6 +24,6 @@ public:
     void rotateLeftClockwise();
     void rotateRightClockwise();
 
-    void rotateClockwise(const Layer& layer, int steps);
+    void rotateClockwise(const Layer& layer, int steps = 1);
     //void rotateClockwise(Orientation face_orientation, Angle angle);
 };
