@@ -1,4 +1,5 @@
 #include "face.h"
+#include "layer.h"
 
 class Cube
 {
@@ -23,6 +24,6 @@ public:
     void rotateLeftClockwise();
     void rotateRightClockwise();
 
-    void rotateClockwise(Orientation face_orientation, int steps);
+    void rotateClockwise(const Layer& layer, int steps);
     //void rotateClockwise(Orientation face_orientation, Angle angle);
 };

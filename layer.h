@@ -2,11 +2,14 @@
 
 #include "colored_cubelet.h"
 
+#pragma once
 class Layer
 {
 public:
     std::function<bool(const ColoredCubelet& cubelet)> contains;
     explicit Layer(const std::function<bool(const ColoredCubelet& cubelet)>& contains);
+
+    Orientation getAxis();
 };
 
 const Layer xP1Layer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.x == 1; });
@@ -18,3 +21,10 @@ const Layer zN1Layer([](const ColoredCubelet& cubelet)-> bool { return cubelet.p
 const Layer x0Layer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.x == 0; });
 const Layer y0Layer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.y == 0; });
 const Layer z0Layer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.z == 0; });
+
+inline const Layer& frontLayer = xP1Layer;
+inline const Layer& backLayer = xN1Layer;
+inline const Layer& rightLayer = yP1Layer;
+inline const Layer& leftLayer = yN1Layer;
+inline const Layer& topLayer = zP1Layer;
+inline const Layer& bottomLayer = zN1Layer;

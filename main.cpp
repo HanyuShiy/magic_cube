@@ -9,7 +9,7 @@ int main()
     // std::cout << "bottom face before rotation:\n";
     // bottom.print();
 
-    cube.rotateClockwise(FRONT_ORIENTATED, 4);
+    cube.rotateFrontClockwise();
 
     std::cout << "bottom face after rotation:\n";
     cube.getBottom().print();

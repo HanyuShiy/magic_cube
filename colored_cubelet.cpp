@@ -69,8 +69,6 @@ void ColoredCubelet::rotateZClockwise()
 
 void ColoredCubelet::rotateAround(const Orientation axis)
 {
-
-
     if (axis == FRONT_ORIENTATED || axis == BACK_ORIENTATED)
     {
         rotateXClockwise();

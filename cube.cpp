@@ -1,5 +1,7 @@
 #include "cube.h"
 
+#include "layer.h"
+
 Cube::Cube(): cubelets{
     ColoredCubelet(1, 1, 1),
     ColoredCubelet(1, 1, 0),
@@ -39,27 +41,27 @@ void Cube::coloring()
 {
     for (auto& cubelet : cubelets)
     {
-        if (cubelet.onFrontFace())
+        if (frontLayer.contains(cubelet))
         {
             cubelet.coloring(FRONT_ORIENTATED, Color::RED);
         }
-        if (cubelet.onBackFace())
+        if (backLayer.contains(cubelet))
         {
             cubelet.coloring(BACK_ORIENTATED, Color::ORANGE);
         }
-        if (cubelet.onTopFace())
+        if (topLayer.contains(cubelet))
         {
             cubelet.coloring(TOP_ORIENTATED, Color::WHITE);
         }
-        if (cubelet.onBottomFace())
+        if (bottomLayer.contains(cubelet))
         {
             cubelet.coloring(BOTTOM_ORIENTATED, Color::YELLOW);
         }
-        if (cubelet.onLeftFace())
+        if (leftLayer.contains(cubelet))
         {
             cubelet.coloring(LEFT_ORIENTATED, Color::BLUE);
         }
-        if (cubelet.onRightFace())
+        if (rightLayer.contains(cubelet))
         {
             cubelet.coloring(RIGHT_ORIENTATED, Color::GREEN);
         }
@@ -71,7 +73,7 @@ Face Cube::getFront()
     std::array<std::array<Color, 3>, 3> frontFace{};
     for (const auto& cubelet : cubelets)
     {
-        if (cubelet.onFrontFace()) // Check if the cubelet is on the front face
+        if (xP1Layer.contains(cubelet))
         {
             frontFace[cubelet.position.y + 1][cubelet.position.z + 1] = cubelet.getFaceOn(FRONT_ORIENTATED);
         }
@@ -84,7 +86,7 @@ Face Cube::getBack()
     std::array<std::array<Color, 3>, 3> backFace{};
     for (const auto& cubelet : cubelets)
     {
-        if (cubelet.onBackFace())
+        if (xN1Layer.contains(cubelet))
         {
             backFace[cubelet.position.y + 1][cubelet.position.z + 1] = cubelet.getFaceOn(BACK_ORIENTATED);
         }
@@ -97,7 +99,7 @@ Face Cube::getLeft()
     std::array<std::array<Color, 3>, 3> leftFace{};
     for (const auto& cubelet : cubelets)
     {
-        if (cubelet.onLeftFace())
+        if (yN1Layer.contains(cubelet))
         {
             leftFace[cubelet.position.z + 1][cubelet.position.x + 1] = cubelet.getFaceOn(LEFT_ORIENTATED);
         }
@@ -110,7 +112,7 @@ Face Cube::getRight()
     std::array<std::array<Color, 3>, 3> leftFace{};
     for (const auto& cubelet : cubelets)
     {
-        if (cubelet.onRightFace())
+        if (yP1Layer.contains(cubelet))
         {
             leftFace[cubelet.position.x + 1][cubelet.position.z + 1] = cubelet.getFaceOn(RIGHT_ORIENTATED);
         }
@@ -123,7 +125,7 @@ Face Cube::getTop()
     std::array<std::array<Color, 3>, 3> leftFace{};
     for (const auto& cubelet : cubelets)
     {
-        if (cubelet.onTopFace())
+        if (zP1Layer.contains(cubelet))
         {
             leftFace[cubelet.position.x + 1][cubelet.position.y + 1] = cubelet.getFaceOn(TOP_ORIENTATED);
         }
@@ -136,7 +138,7 @@ Face Cube::getBottom()
     std::array<std::array<Color, 3>, 3> leftFace{};
     for (const auto& cubelet : cubelets)
     {
-        if (cubelet.onBottomFace())
+        if (zN1Layer.contains(cubelet))
         {
             leftFace[cubelet.position.x + 1][cubelet.position.y + 1] = cubelet.getFaceOn(BOTTOM_ORIENTATED);
         }
@@ -148,7 +150,7 @@ void Cube::rotateFrontClockwise()
 {
     for (auto& cubelet : cubelets)
     {
-        if (cubelet.onFrontFace()) // cubelet.position.x=1
+        if (xP1Layer.contains(cubelet)) // cubelet.position.x=1
         {
             cubelet.rotateXClockwise(); // rotate cubelet.position
         }
@@ -159,7 +161,7 @@ void Cube::rotateBackClockwise()
 {
     for (auto& cubelet : cubelets)
     {
-        if (cubelet.onBackFace()) // cubelet.position.x=1
+        if (xN1Layer.contains(cubelet)) // cubelet.position.x=1
         {
             cubelet.rotateXClockwise(); // rotate cubelet.position
         }
@@ -170,7 +172,7 @@ void Cube::rotateTopClockwise()
 {
     for (auto& cubelet : cubelets)
     {
-        if (cubelet.onTopFace()) // cubelet.position.x=1
+        if (zP1Layer.contains(cubelet)) // cubelet.position.x=1
         {
             cubelet.rotateZClockwise(); // rotate cubelet.position
         }
@@ -181,7 +183,7 @@ void Cube::rotateBottomClockwise()
 {
     for (auto& cubelet : cubelets)
     {
-        if (cubelet.onBottomFace()) // cubelet.position.x=1
+        if (zN1Layer.contains(cubelet)) // cubelet.position.x=1
         {
             cubelet.rotateZClockwise(); // rotate cubelet.position
         }
@@ -192,7 +194,7 @@ void Cube::rotateLeftClockwise()
 {
     for (auto& cubelet : cubelets)
     {
-        if (cubelet.onLeftFace()) // cubelet.position.x=1
+        if (yN1Layer.contains(cubelet)) // cubelet.position.x=1
         {
             cubelet.rotateYClockwise(); // rotate cubelet.position
         }
@@ -203,22 +205,22 @@ void Cube::rotateRightClockwise()
 {
     for (auto& cubelet : cubelets)
     {
-        if (cubelet.onRightFace()) // cubelet.position.x=1
+        if (yP1Layer.contains(cubelet)) // cubelet.position.x=1
         {
             cubelet.rotateYClockwise(); // rotate cubelet.position
         }
     }
 }
 
-void Cube::rotateClockwise(const Orientation face_orientation, const int steps = 1)
+void Cube::rotateClockwise(const Layer& layer, const int steps = 1)
 {
     for (size_t i = 0; i < steps; ++i)
     {
         for (auto& cubelet : cubelets)
         {
-            if (cubelet.getFaceOn(face_orientation) != EMPTY)
+            if (layer.contains(cubelet))
             {
-                cubelet.rotateAround(face_orientation);
+                // cubelet.rotateAround();
             }
         }
     }
