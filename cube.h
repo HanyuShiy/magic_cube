@@ -11,12 +11,12 @@ public:
 
     void coloring();
 
-    Face getFront();
-    Face getBack();
-    Face getLeft();
-    Face getRight();
-    Face getTop();
-    Face getBottom();
+    [[nodiscard]] Face getFront();
+    [[nodiscard]] Face getBack();
+    [[nodiscard]] Face getLeft();
+    [[nodiscard]] Face getRight();
+    [[nodiscard]] Face getTop();
+    [[nodiscard]] Face getBottom();
 
     void rotateFrontClockwise();
     void rotateBackClockwise();
@@ -26,6 +26,4 @@ public:
     void rotateRightClockwise();
 
     void rotateClockwise(const Layer& layer, int steps = 1);
-
-
 };

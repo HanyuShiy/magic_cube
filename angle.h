@@ -9,7 +9,7 @@ public:
 
     explicit Angle(int value);
 
-    Angle add(Angle other) const;
+    [[nodiscard]] Angle add(Angle other) const;
 
     static int cos(Angle angle);
     static int sin(Angle angle);

@@ -9,9 +9,9 @@ class Orientation
 public:
     Orientation(int x, int y, int z);
 
-    Orientation rotateX(Angle angle) const;
-    Orientation rotateY(Angle angle) const;
-    Orientation rotateZ(Angle angle) const;
+    [[nodiscard]] Orientation rotateX(const Angle& angle) const;
+    [[nodiscard]] Orientation rotateY(const Angle& angle) const;
+    [[nodiscard]] Orientation rotateZ(const Angle& angle) const;
 
     bool operator==(const Orientation& that) const = default;
 };
