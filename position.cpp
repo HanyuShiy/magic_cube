@@ -36,6 +36,6 @@ Position Position::rotateZ(const Angle& angle) const
 {
     // Rotate around Z-axis
     const int newY = y * Angle::cos(angle) - x * Angle::sin(angle);
-    const int newX = -y * Angle::sin(angle) + x * Angle::cos(angle);
+    const int newX = y * Angle::sin(angle) + x * Angle::cos(angle);
     return {newX, newY, z};
 }

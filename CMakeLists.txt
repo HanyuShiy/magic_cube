@@ -4,7 +4,7 @@ project(magic_cube)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(magic_cube
-    main.cpp
+        main.cpp
         angle.cpp
         colored_cubelet.cpp
         cube.cpp

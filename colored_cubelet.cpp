@@ -1,7 +1,7 @@
 #include "colored_cubelet.h"
 
 
-ColoredCubelet::ColoredCubelet(const int x, const int y, const int z):
+ColoredCubelet::ColoredCubelet(const int x, const int y, const int z) :
     Cubelet(x, y, z),
     faces{
         {
@@ -29,7 +29,7 @@ void ColoredCubelet::coloring(const Orientation orientation, const Color color)
 
 Color ColoredCubelet::getFaceOn(const Orientation orientation) const
 {
-    for (auto face : faces)
+    for (auto& face : faces)
     {
         if (face.orientation == orientation)
         {
@@ -69,15 +69,15 @@ void ColoredCubelet::rotateZClockwise()
 
 void ColoredCubelet::rotateAround(const Orientation axis)
 {
-    if (axis == FRONT_ORIENTATED || axis == BACK_ORIENTATED)
+    if (axis == Orientation{1, 0, 0})
     {
         rotateXClockwise();
     }
-    if (axis == LEFT_ORIENTATED || axis == RIGHT_ORIENTATED)
+    if (axis == Orientation{0, 1, 0})
     {
-        rotateZClockwise();
+        rotateYClockwise();
     }
-    if (axis == TOP_ORIENTATED || axis == BOTTOM_ORIENTATED)
+    if (axis == Orientation{0, 0, 1})
     {
         rotateZClockwise();
     }

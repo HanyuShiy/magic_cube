@@ -9,8 +9,6 @@ public:
 
     Orientation orientation;
 
-    bool isColored() const;
-
     explicit CubeletFace(const Orientation& orientation);
 
     void coloring(Color color);
