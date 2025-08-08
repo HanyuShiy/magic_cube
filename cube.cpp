@@ -2,7 +2,7 @@
 
 #include "layer.h"
 
-Cube::Cube(): cubelets{
+Cube::Cube() : cubelets{
     ColoredCubelet(1, 1, 1),
     ColoredCubelet(1, 1, 0),
     ColoredCubelet(1, 1, -1),
@@ -144,72 +144,6 @@ Face Cube::getBottom()
         }
     }
     return {bottomFace};
-}
-
-void Cube::rotateFrontClockwise()
-{
-    for (auto& cubelet : cubelets)
-    {
-        if (xP1Layer.contains(cubelet)) // cubelet.position.x=1
-        {
-            cubelet.rotateXClockwise(); // rotate cubelet.position
-        }
-    }
-}
-
-void Cube::rotateBackClockwise()
-{
-    for (auto& cubelet : cubelets)
-    {
-        if (xN1Layer.contains(cubelet)) // cubelet.position.x=1
-        {
-            cubelet.rotateXClockwise(); // rotate cubelet.position
-        }
-    }
-}
-
-void Cube::rotateTopClockwise()
-{
-    for (auto& cubelet : cubelets)
-    {
-        if (zP1Layer.contains(cubelet)) // cubelet.position.x=1
-        {
-            cubelet.rotateZClockwise(); // rotate cubelet.position
-        }
-    }
-}
-
-void Cube::rotateBottomClockwise()
-{
-    for (auto& cubelet : cubelets)
-    {
-        if (zN1Layer.contains(cubelet)) // cubelet.position.x=1
-        {
-            cubelet.rotateZClockwise(); // rotate cubelet.position
-        }
-    }
-}
-
-void Cube::rotateLeftClockwise()
-{
-    for (auto& cubelet : cubelets)
-    {
-        if (yN1Layer.contains(cubelet)) // cubelet.position.x=1
-        {
-            cubelet.rotateYClockwise(); // rotate cubelet.position
-        }
-    }
-}
-
-void Cube::rotateRightClockwise()
-{
-    for (auto& cubelet : cubelets)
-    {
-        if (yP1Layer.contains(cubelet)) // cubelet.position.x=1
-        {
-            cubelet.rotateYClockwise(); // rotate cubelet.position
-        }
-    }
 }
 
 void Cube::rotateClockwise(const Layer& layer, const int steps)

@@ -18,12 +18,5 @@ public:
     [[nodiscard]] Face getTop();
     [[nodiscard]] Face getBottom();
 
-    void rotateFrontClockwise();
-    void rotateBackClockwise();
-    void rotateTopClockwise();
-    void rotateBottomClockwise();
-    void rotateLeftClockwise();
-    void rotateRightClockwise();
-
     void rotateClockwise(const Layer& layer, int steps = 1);
 };
