@@ -146,7 +146,7 @@ Face Cube::getBottom()
     return {bottomFace};
 }
 
-void Cube::rotateClockwise(const Layer& layer, const int steps)
+Cube& Cube::rotateClockwise(const Layer& layer, const int steps)
 {
     for (size_t i = 0; i < steps; ++i)
     {
@@ -158,4 +158,5 @@ void Cube::rotateClockwise(const Layer& layer, const int steps)
             }
         }
     }
+    return *this;
 }

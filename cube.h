@@ -18,5 +18,5 @@ public:
     [[nodiscard]] Face getTop();
     [[nodiscard]] Face getBottom();
 
-    void rotateClockwise(const Layer& layer, int steps = 1);
+    Cube& rotateClockwise(const Layer& layer, int steps = 1);
 };
