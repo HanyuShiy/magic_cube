@@ -1,6 +1,5 @@
 #include <iostream>
 #include "cube.h"
-#include "layer.h"
 
 int main()
 {

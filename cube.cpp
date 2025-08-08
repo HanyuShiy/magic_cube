@@ -1,5 +1,6 @@
 #include "cube.h"
 
+#include <iostream>
 #include <random>
 
 #include "layer.h"
@@ -148,15 +149,19 @@ Face Cube::getBottom()
     return {bottomFace};
 }
 
-Cube& Cube::rotateClockwise(const Layer& layer, const int steps)
+Cube& Cube::rotateClockwise(const Layer& layer, const Angle& angle, const int steps)
 {
+    // Rotate the given layer clockwise around its axis.
+    // "Clockwise" is only relative to the given angle.
+    // If the given angle < 0 or > pi, the effect may be a counterclockwise rotation, depending on the magnitude.
+
     for (size_t i = 0; i < steps; ++i)
     {
         for (auto& cubelet : cubelets)
         {
             if (layer.contains(cubelet))
             {
-                cubelet.rotateAround(layer.getAxis(), ONE_STEP_CLOCKWISE);
+                cubelet.rotateAround(layer.getAxis(), angle);
             }
         }
     }
@@ -178,14 +183,18 @@ Cube& Cube::rotateDegreeClockwise(const Layer& layer, const Angle& angle)
 
 Cube& Cube::scramble(const int steps)
 {
-    const std::array<Layer, 9> layers{
+    const std::array layers{
         frontLayer, backLayer, topLayer, bottomLayer, rightLayer, leftLayer, x0Layer, y0Layer, z0Layer
     };
-    std::uniform_int_distribution dist(0, 8);
+    const std::array angles{
+        CLOCKWISE_90, COUNTERCLOCKWISE_90, HALF_ROUND
+    };
+    std::uniform_int_distribution dist1(0, 8);
+    std::uniform_int_distribution dist2(0, 2);
     std::default_random_engine e(time(nullptr));
     for (size_t i = 0; i < steps; ++i)
     {
-        this->rotateClockwise(layers[dist(e)], 1);
+        this->rotateClockwise(layers[dist1(e)], angles[dist2(e)], 1);
     }
     return *this;
 }

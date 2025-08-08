@@ -19,7 +19,7 @@ public:
     [[nodiscard]] Face getBottom();
 
     // rotate n-step 90 degree:
-    Cube& rotateClockwise(const Layer& layer, int steps = 1);
+    Cube& rotateClockwise(const Layer& layer, const Angle& angle = CLOCKWISE_90, int steps = 1);
     // rotate a given-degree-angle:
     Cube& rotateDegreeClockwise(const Layer& layer, const Angle& angle);
 

@@ -17,5 +17,5 @@ public:
 
 const auto ANGLE_ZERO = Angle{0};
 const auto HALF_ROUND = Angle{2};
-const auto ONE_STEP_CLOCKWISE = Angle{1};
-const auto ONE_STEP_COUNTERCLOCKWISE = Angle{-1};
+const auto CLOCKWISE_90 = Angle{1};
+const auto COUNTERCLOCKWISE_90 = Angle{-1};
