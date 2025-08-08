@@ -177,7 +177,6 @@ Cube& Cube::rotateDegreeClockwise(const Layer& layer, const Angle& angle)
             cubelet.rotateAround(layer.getAxis(), angle);
         }
     }
-
     return *this;
 }
 
@@ -194,7 +193,7 @@ Cube& Cube::scramble(const int steps)
     std::default_random_engine e(time(nullptr));
     for (size_t i = 0; i < steps; ++i)
     {
-        this->rotateClockwise(layers[dist1(e)], angles[dist2(e)], 1);
+        this->rotateDegreeClockwise(layers[dist1(e)], angles[dist2(e)]);
     }
     return *this;
 }
