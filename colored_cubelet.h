@@ -18,9 +18,9 @@ public:
 
     [[nodiscard]] Color getFaceOn(Orientation orientation) const;
 
-    void rotateXClockwise() override;
-    void rotateYClockwise() override;
-    void rotateZClockwise() override;
+    void rotateXClockwise(Angle angle) override;
+    void rotateYClockwise(Angle angle) override;
+    void rotateZClockwise(Angle angle) override;
 
-    void rotateAround(Orientation axis);
+    void rotateAround(const Orientation& axis, const Angle& angle);
 };

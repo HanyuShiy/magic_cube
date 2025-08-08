@@ -11,20 +11,20 @@ void CubeletFace::coloring(const Color color)
     this->color = color;
 }
 
-void CubeletFace::rotateXClockwise()
+void CubeletFace::rotateXClockwise(const Angle angle)
 {
-    const auto afterRotation = this->orientation.rotateX(ONE_STEP_CLOCKWISE);
+    const auto afterRotation = this->orientation.rotateX(angle);
     this->orientation = afterRotation;
 }
 
-void CubeletFace::rotateYClockwise()
+void CubeletFace::rotateYClockwise(const Angle angle)
 {
-    const auto afterRotation = this->orientation.rotateY(ONE_STEP_CLOCKWISE);
+    const auto afterRotation = this->orientation.rotateY(angle);
     this->orientation = afterRotation;
 }
 
-void CubeletFace::rotateZClockwise()
+void CubeletFace::rotateZClockwise(const Angle angle)
 {
-    const auto afterRotation = this->orientation.rotateZ(ONE_STEP_CLOCKWISE);
+    const auto afterRotation = this->orientation.rotateZ(angle);
     this->orientation = afterRotation;
 }

@@ -13,7 +13,7 @@ public:
 
     void coloring(Color color);
 
-    void rotateXClockwise();
-    void rotateYClockwise();
-    void rotateZClockwise();
+    void rotateXClockwise(Angle angle);
+    void rotateYClockwise(Angle angle);
+    void rotateZClockwise(Angle angle);
 };

@@ -154,9 +154,22 @@ Cube& Cube::rotateClockwise(const Layer& layer, const int steps)
         {
             if (layer.contains(cubelet))
             {
-                cubelet.rotateAround(layer.getAxis());
+                cubelet.rotateAround(layer.getAxis(), ONE_STEP_CLOCKWISE);
             }
         }
     }
+    return *this;
+}
+
+Cube& Cube::rotateDegreeClockwise(const Layer& layer, const Angle& angle)
+{
+    for (auto& cubelet : cubelets)
+    {
+        if (layer.contains(cubelet))
+        {
+            cubelet.rotateAround(layer.getAxis(), angle);
+        }
+    }
+
     return *this;
 }

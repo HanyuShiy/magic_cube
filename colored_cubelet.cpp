@@ -40,45 +40,45 @@ Color ColoredCubelet::getFaceOn(const Orientation orientation) const
 }
 
 
-void ColoredCubelet::rotateXClockwise()
+void ColoredCubelet::rotateXClockwise(const Angle angle)
 {
-    Cubelet::rotateXClockwise();
+    Cubelet::rotateXClockwise(angle);
     for (auto& face : faces)
     {
-        face.rotateXClockwise();
+        face.rotateXClockwise(angle);
     }
 }
 
-void ColoredCubelet::rotateYClockwise()
+void ColoredCubelet::rotateYClockwise(const Angle angle)
 {
-    Cubelet::rotateYClockwise();
+    Cubelet::rotateYClockwise(angle);
     for (auto& face : faces)
     {
-        face.rotateYClockwise();
+        face.rotateYClockwise(angle);
     }
 }
 
-void ColoredCubelet::rotateZClockwise()
+void ColoredCubelet::rotateZClockwise(const Angle angle)
 {
-    Cubelet::rotateZClockwise();
+    Cubelet::rotateZClockwise(angle);
     for (auto& face : faces)
     {
-        face.rotateZClockwise();
+        face.rotateZClockwise(angle);
     }
 }
 
-void ColoredCubelet::rotateAround(const Orientation axis)
+void ColoredCubelet::rotateAround(const Orientation& axis, const Angle& angle)
 {
     if (axis == Orientation{1, 0, 0})
     {
-        rotateXClockwise();
+        rotateXClockwise(angle);
     }
     if (axis == Orientation{0, 1, 0})
     {
-        rotateYClockwise();
+        rotateYClockwise(angle);
     }
     if (axis == Orientation{0, 0, 1})
     {
-        rotateZClockwise();
+        rotateZClockwise(angle);
     }
 }

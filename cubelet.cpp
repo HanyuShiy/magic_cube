@@ -1,21 +1,21 @@
 #include "cubelet.h"
 
-Cubelet::Cubelet(const int x, const int y, const int z):
+Cubelet::Cubelet(const int x, const int y, const int z) :
     position(x, y, z)
 {
 }
 
-void Cubelet::rotateXClockwise()
+void Cubelet::rotateXClockwise(const Angle angle)
 {
-    position = position.rotateX(ONE_STEP_CLOCKWISE);
+    position = position.rotateX(angle);
 }
 
-void Cubelet::rotateYClockwise()
+void Cubelet::rotateYClockwise(const Angle angle)
 {
-    position = position.rotateY(ONE_STEP_CLOCKWISE);
+    position = position.rotateY(angle);
 }
 
-void Cubelet::rotateZClockwise()
+void Cubelet::rotateZClockwise(const Angle angle)
 {
-    position = position.rotateZ(ONE_STEP_CLOCKWISE);
+    position = position.rotateZ(angle);
 }
