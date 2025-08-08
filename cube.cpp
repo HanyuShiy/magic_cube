@@ -1,5 +1,7 @@
 #include "cube.h"
 
+#include <random>
+
 #include "layer.h"
 
 Cube::Cube() : cubelets{
@@ -171,5 +173,19 @@ Cube& Cube::rotateDegreeClockwise(const Layer& layer, const Angle& angle)
         }
     }
 
+    return *this;
+}
+
+Cube& Cube::scramble(const int steps)
+{
+    const std::array<Layer, 9> layers{
+        frontLayer, backLayer, topLayer, bottomLayer, rightLayer, leftLayer, x0Layer, y0Layer, z0Layer
+    };
+    std::uniform_int_distribution dist(0, 8);
+    std::default_random_engine e(time(nullptr));
+    for (size_t i = 0; i < steps; ++i)
+    {
+        this->rotateClockwise(layers[dist(e)], 1);
+    }
     return *this;
 }

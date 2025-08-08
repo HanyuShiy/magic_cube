@@ -22,4 +22,6 @@ public:
     Cube& rotateClockwise(const Layer& layer, int steps = 1);
     // rotate a given-degree-angle:
     Cube& rotateDegreeClockwise(const Layer& layer, const Angle& angle);
+
+    Cube& scramble(int steps = 10);
 };
