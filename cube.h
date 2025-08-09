@@ -18,9 +18,10 @@ public:
     [[nodiscard]] Face getTop();
     [[nodiscard]] Face getBottom();
 
-    const ColoredCubelet& getCubeletAt(Position position) const;
+    [[nodiscard]] const ColoredCubelet& getCubeletAt(Position position) const;
 
     Cube& resetZ0Layer(const Orientation& orientation);
+    Cube& resetZ1Layer();
 
     Cube& rotateClockwise(const Layer& layer, const Angle& angle = CLOCKWISE_90, int steps = 1);
     // rotate a given-degree-angle:

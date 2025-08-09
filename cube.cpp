@@ -163,13 +163,13 @@ const ColoredCubelet& Cube::getCubeletAt(const Position position) const
 
 Cube& Cube::resetZ0Layer(const Orientation& orientation) // the bottom face is already reset
 {
-    const ColoredCubelet& operand = getCubeletAt({1, 0, 0});
-    while (operand.getFaceOn(orientation)
+    const ColoredCubelet& target = getCubeletAt({1, 0, 0});
+    while (target.getFaceOn(orientation)
         != getCubeletAt({1, 0, -1}).getFaceOn(orientation))
     {
         rotateClockwise(bottomLayer, CLOCKWISE_90);
     }
-    while (operand.getFaceOn(orientation)
+    while (target.getFaceOn(orientation)
         != getCubeletAt({1, 0, 0}).getFaceOn(orientation))
     {
         rotateClockwise(topLayer, CLOCKWISE_90);
@@ -190,7 +190,7 @@ Cube& Cube::resetZ0Layer(const Orientation& orientation) // the bottom face is a
 
     if (getCubeletAt({1, 0, 1}).getFaceOn(TOP_ORIENTATED)
         == getCubeletAt({0, -1, 0}).getFaceOn(LEFT_ORIENTATED))
-        // the operand should move to the left
+    // the operand should move to the left
     {
         this->rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
             .rotateClockwise(leftLayer, CLOCKWISE_90)
@@ -204,6 +204,26 @@ Cube& Cube::resetZ0Layer(const Orientation& orientation) // the bottom face is a
     return *this;
 }
 
+
+Cube& Cube::resetZ1Layer() // the bottomLayer & z0Layer is already reset
+{
+    const Color target_color = getCubeletAt({0, 0, 1}).getFaceOn(TOP_ORIENTATED);
+    while (!(getCubeletAt({1, 0, 1}).getFaceOn(TOP_ORIENTATED) == target_color
+            && getCubeletAt({0, -1, 1}).getFaceOn(TOP_ORIENTATED) == target_color
+            && getCubeletAt({-1, 0, 1}).getFaceOn(TOP_ORIENTATED) == target_color)
+        && getCubeletAt({0, 1, 1}).getFaceOn(TOP_ORIENTATED) == target_color)
+    {
+        rotateClockwise(frontLayer, CLOCKWISE_90)
+            .rotateClockwise(topLayer, CLOCKWISE_90)
+            .rotateClockwise(rightLayer, CLOCKWISE_90)
+            .rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
+            .rotateClockwise(rightLayer, COUNTERCLOCKWISE_90)
+            .rotateClockwise(frontLayer, COUNTERCLOCKWISE_90);
+    }
+    // Now the topLayer is a crossing like `+`
+
+    return *this;
+}
 
 Cube& Cube::rotateClockwise(const Layer& layer, const Angle& angle, const int steps)
 {
