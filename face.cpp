@@ -1,8 +1,24 @@
 #include "face.h"
 #include <iostream>
 
-Face::Face(const std::array<std::array<Color, 3>, 3>& colors): colors(colors)
+Face::Face(const std::array<std::array<Color, 3>, 3>& colors) : colors(colors)
 {
+}
+
+bool Face::isSingleColor() const
+{
+    auto& firstColor = colors[0][0];
+    for (auto& line : colors)
+    {
+        for (auto& color : line)
+        {
+            if (color != firstColor)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 void Face::print() const

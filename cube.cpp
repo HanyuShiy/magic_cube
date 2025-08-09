@@ -221,6 +221,11 @@ Cube& Cube::resetZ1Layer() // the bottomLayer & z0Layer is already reset
             .rotateClockwise(frontLayer, COUNTERCLOCKWISE_90);
     }
     // Now the topLayer is a crossing like `+`
+    //
+    // while (!([this]-> bool { for (auto& this->getTop())
+    // {
+    //     for
+    // } })) {}
 
     return *this;
 }

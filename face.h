@@ -9,5 +9,6 @@ public:
     std::array<std::array<Color, 3>, 3> colors;
     Face(const std::array<std::array<Color, 3>, 3>& colors);
 
+    [[nodiscard]] bool isSingleColor() const;
     void print() const;
 };
