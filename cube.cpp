@@ -62,11 +62,11 @@ void Cube::coloring()
         }
         if (leftLayer.contains(cubelet))
         {
-            cubelet.coloring(LEFT_ORIENTATED, Color::BLUE);
+            cubelet.coloring(LEFT_ORIENTATED, Color::GREEN);
         }
         if (rightLayer.contains(cubelet))
         {
-            cubelet.coloring(RIGHT_ORIENTATED, Color::GREEN);
+            cubelet.coloring(RIGHT_ORIENTATED, Color::BLUE);
         }
     }
 }
@@ -148,6 +148,62 @@ Face Cube::getBottom()
     }
     return {bottomFace};
 }
+
+const ColoredCubelet& Cube::getCubeletAt(const Position position) const
+{
+    for (auto& cubelet : cubelets)
+    {
+        if (cubelet.position == position)
+        {
+            return cubelet;
+        }
+    }
+    throw;
+}
+
+Cube& Cube::resetZ0Layer(const Orientation& orientation) // the bottom face is already reset
+{
+    const ColoredCubelet& operand = getCubeletAt({1, 0, 0});
+    while (operand.getFaceOn(orientation)
+        != getCubeletAt({1, 0, -1}).getFaceOn(orientation))
+    {
+        rotateClockwise(bottomLayer, CLOCKWISE_90);
+    }
+    while (operand.getFaceOn(orientation)
+        != getCubeletAt({1, 0, 0}).getFaceOn(orientation))
+    {
+        rotateClockwise(topLayer, CLOCKWISE_90);
+    }
+    if (getCubeletAt({1, 0, 1}).getFaceOn(TOP_ORIENTATED)
+        == getCubeletAt({0, 1, 0}).getFaceOn(RIGHT_ORIENTATED))
+    // the operand should move to the right
+    {
+        this->rotateClockwise(topLayer, CLOCKWISE_90)
+            .rotateClockwise(rightLayer, CLOCKWISE_90)
+            .rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
+            .rotateClockwise(rightLayer, COUNTERCLOCKWISE_90)
+            .rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
+            .rotateClockwise(frontLayer, COUNTERCLOCKWISE_90)
+            .rotateClockwise(topLayer, CLOCKWISE_90)
+            .rotateClockwise(frontLayer, CLOCKWISE_90);
+    }
+
+    if (getCubeletAt({1, 0, 1}).getFaceOn(TOP_ORIENTATED)
+        == getCubeletAt({0, -1, 0}).getFaceOn(LEFT_ORIENTATED))
+        // the operand should move to the left
+    {
+        this->rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
+            .rotateClockwise(leftLayer, CLOCKWISE_90)
+            .rotateClockwise(topLayer, CLOCKWISE_90)
+            .rotateClockwise(leftLayer, COUNTERCLOCKWISE_90)
+            .rotateClockwise(topLayer, CLOCKWISE_90)
+            .rotateClockwise(frontLayer, CLOCKWISE_90)
+            .rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
+            .rotateClockwise(frontLayer, COUNTERCLOCKWISE_90);
+    }
+    return *this;
+}
+
 
 Cube& Cube::rotateClockwise(const Layer& layer, const Angle& angle, const int steps)
 {

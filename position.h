@@ -14,4 +14,6 @@ public:
     [[nodiscard]] Position rotateX(const Angle& angle) const;
     [[nodiscard]] Position rotateY(const Angle& angle) const;
     [[nodiscard]] Position rotateZ(const Angle& angle) const;
+
+    bool operator==(const Position& position) const = default;
 };
