@@ -20,6 +20,8 @@ public:
 
     [[nodiscard]] const ColoredCubelet& getCubeletAt(Position position) const;
 
+    [[nodiscard]] Position& findColorOn(Color color, const Layer& layer, const Orientation& orientation);
+
     Cube& resetZ0Layer(const Orientation& orientation);
     Cube& resetZ1Layer();
 

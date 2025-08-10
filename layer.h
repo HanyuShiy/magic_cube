@@ -26,4 +26,3 @@ const Layer bottomLayer([](const ColoredCubelet& cubelet)-> bool { return cubele
 const Layer x0Layer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.x == 0; }, {1, 0, 0});
 const Layer y0Layer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.y == 0; }, {0, 1, 0});
 const Layer z0Layer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.z == 0; }, {0, 0, 1});
-

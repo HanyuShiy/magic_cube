@@ -161,6 +161,24 @@ const ColoredCubelet& Cube::getCubeletAt(const Position position) const
     throw;
 }
 
+Position& Cube::findColorOn(const Color color, const Layer& layer, const Orientation& orientation)
+{
+    for (auto& cubelet : cubelets)
+    {
+        if (layer.contains(cubelet))
+        {
+            for (auto& face : cubelet.faces)
+            {
+                if (face.orientation == orientation && face.color == color)
+                {
+                    return cubelet.position;
+                }
+            }
+        }
+    }
+    throw std::invalid_argument("No target color in the given orientation on the given layer!");
+}
+
 Cube& Cube::resetZ0Layer(const Orientation& orientation) // the bottom face is already reset
 {
     const ColoredCubelet& target = getCubeletAt({1, 0, 0});
@@ -178,6 +196,7 @@ Cube& Cube::resetZ0Layer(const Orientation& orientation) // the bottom face is a
         == getCubeletAt({0, 1, 0}).getFaceOn(RIGHT_ORIENTATED))
     // the operand should move to the right
     {
+        // center layer algo (right)
         this->rotateClockwise(topLayer, CLOCKWISE_90)
             .rotateClockwise(rightLayer, CLOCKWISE_90)
             .rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
@@ -192,6 +211,7 @@ Cube& Cube::resetZ0Layer(const Orientation& orientation) // the bottom face is a
         == getCubeletAt({0, -1, 0}).getFaceOn(LEFT_ORIENTATED))
     // the operand should move to the left
     {
+        // center layer algo (left)
         this->rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
             .rotateClockwise(leftLayer, CLOCKWISE_90)
             .rotateClockwise(topLayer, CLOCKWISE_90)
@@ -213,6 +233,7 @@ Cube& Cube::resetZ1Layer() // the bottomLayer & z0Layer is already reset
             && getCubeletAt({-1, 0, 1}).getFaceOn(TOP_ORIENTATED) == target_color)
         && getCubeletAt({0, 1, 1}).getFaceOn(TOP_ORIENTATED) == target_color)
     {
+        // top cross algo
         rotateClockwise(frontLayer, CLOCKWISE_90)
             .rotateClockwise(topLayer, CLOCKWISE_90)
             .rotateClockwise(rightLayer, CLOCKWISE_90)
@@ -221,11 +242,18 @@ Cube& Cube::resetZ1Layer() // the bottomLayer & z0Layer is already reset
             .rotateClockwise(frontLayer, COUNTERCLOCKWISE_90);
     }
     // Now the topLayer is a crossing like `+`
-    //
-    // while (!([this]-> bool { for (auto& this->getTop())
-    // {
-    //     for
-    // } })) {}
+
+    while (!getTop().isSingleColor())
+    {
+        if (getCubeletAt({-1, -1, 1}).getFaceOn(TOP_ORIENTATED) == target_color)
+        {
+            // do the pattern...
+        }
+        else if ()
+
+
+    }
+
 
     return *this;
 }
