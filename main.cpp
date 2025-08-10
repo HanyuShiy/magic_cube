@@ -9,7 +9,7 @@ int main()
     // bottom.print();
 
     cube.scramble(15);
-    cube.resetZ0Layer(FRONT_ORIENTATED);
+    cube.resetZ0Layer(FRONT_ORIENTATED).resetZ1Layer();
 
 
     std::cout << "bottom face after rotation:\n";

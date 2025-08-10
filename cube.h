@@ -18,7 +18,7 @@ public:
     [[nodiscard]] Face getTop();
     [[nodiscard]] Face getBottom();
 
-    [[nodiscard]] const ColoredCubelet& getCubeletAt(Position position) const;
+    [[nodiscard]] ColoredCubelet& getCubeletAt(Position position);
 
     // [[nodiscard]] Position& findColorOn(Color color, const Layer& layer, const Orientation& orientation);
     void swapTopEdges();

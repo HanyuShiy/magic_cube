@@ -149,7 +149,7 @@ Face Cube::getBottom()
     return {bottomFace};
 }
 
-const ColoredCubelet& Cube::getCubeletAt(const Position position) const
+ColoredCubelet& Cube::getCubeletAt(const Position position)
 {
     for (auto& cubelet : cubelets)
     {
@@ -255,12 +255,22 @@ Cube& Cube::resetZ1Layer() // the bottomLayer & z0Layer is already reset
     }
     // Now the topLayer is a crossing like `+`
 
-    while (getCubeletAt({1, 0, 1}).getFaceOn(FRONT_ORIENTATED)
-        != getCubeletAt({1, 0, 0}).getFaceOn(FRONT_ORIENTATED)) // swap edges
+    ColoredCubelet& operand_front = getCubeletAt({1, 0, 1});
+    ColoredCubelet& operand_left = getCubeletAt({0, -1, 1});
+    const Color frontColor = getCubeletAt({1, 0, 0}).getFaceOn(FRONT_ORIENTATED);
+    while (!(operand_front.getFaceOn(FRONT_ORIENTATED)
+            == getCubeletAt({0, -1, 0}).getFaceOn(LEFT_ORIENTATED)
+        && operand_left.getFaceOn(LEFT_ORIENTATED)
+            == getCubeletAt({1, 0, 0}).getFaceOn(FRONT_ORIENTATED)))
+
     {
-        swapTopEdges();
-    }
-    
+        rotateClockwise(topLayer, CLOCKWISE_90);
+    }    // make preparation for swaping edges
+    swapTopEdges();
+
+    // Now only yellow corners are left
+
+
 
     return *this;
 }
