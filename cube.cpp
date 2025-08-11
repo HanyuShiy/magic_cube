@@ -2,8 +2,10 @@
 
 #include <iostream>
 #include <random>
+#include <sstream>
 
 #include "layer.h"
+#include "rotation.h"
 
 Cube::Cube() : cubelets{
     ColoredCubelet(1, 1, 1),
@@ -177,7 +179,6 @@ Cube& Cube::rotateDegreeClockwise(const Layer& layer, const Angle& angle)
             cubelet.rotateAround(layer.getAxis(), angle);
         }
     }
-
     return *this;
 }
 
@@ -194,7 +195,21 @@ Cube& Cube::scramble(const int steps)
     std::default_random_engine e(time(nullptr));
     for (size_t i = 0; i < steps; ++i)
     {
-        this->rotateClockwise(layers[dist1(e)], angles[dist2(e)], 1);
+        this->rotateClockwise(layers[dist1(e)], angles[dist2(e)]);
+    }
+    return *this;
+}
+
+Cube& Cube::applyAlgo(const std::string& rotations)
+{
+    std::istringstream iss(rotations);
+    std::string token;
+    while (iss >> token)
+    {
+        if (auto rot = Rotation.find(token); rot != Rotation.end())
+        {
+            rot->second(*this);
+        }
     }
     return *this;
 }
