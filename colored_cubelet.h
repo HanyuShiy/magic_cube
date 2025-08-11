@@ -22,5 +22,8 @@ public:
     void rotateYClockwise(Angle angle) override;
     void rotateZClockwise(Angle angle) override;
 
+    bool isEdge() const;
+    bool isCorner() const;
+
     void rotateAround(const Orientation& axis, const Angle& angle);
 };

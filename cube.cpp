@@ -52,23 +52,23 @@ void Cube::coloring()
         }
         if (backLayer.contains(cubelet))
         {
-            cubelet.coloring(BACK_ORIENTATED, Color::ORANGE);
+            cubelet.coloring(BACK_ORIENTATED, ORANGE);
         }
         if (topLayer.contains(cubelet))
         {
-            cubelet.coloring(TOP_ORIENTATED, Color::WHITE);
+            cubelet.coloring(TOP_ORIENTATED, WHITE);
         }
         if (bottomLayer.contains(cubelet))
         {
-            cubelet.coloring(BOTTOM_ORIENTATED, Color::YELLOW);
+            cubelet.coloring(BOTTOM_ORIENTATED, YELLOW);
         }
         if (leftLayer.contains(cubelet))
         {
-            cubelet.coloring(LEFT_ORIENTATED, Color::BLUE);
+            cubelet.coloring(LEFT_ORIENTATED, GREEN);
         }
         if (rightLayer.contains(cubelet))
         {
-            cubelet.coloring(RIGHT_ORIENTATED, Color::GREEN);
+            cubelet.coloring(RIGHT_ORIENTATED, BLUE);
         }
     }
 }
@@ -201,6 +201,7 @@ Cube& Cube::scramble(const int steps)
 }
 
 Cube& Cube::applyAlgo(const std::string& rotations)
+// Accepted rotations must be a sequence of basic rotations, each separated by spaces.
 {
     std::istringstream iss(rotations);
     std::string token;
@@ -213,3 +214,20 @@ Cube& Cube::applyAlgo(const std::string& rotations)
     }
     return *this;
 }
+
+// CubeletFace& Cube::findColorOn(const Color& color, const Layer& layer)
+// {
+//     for (auto& cubelet : cubelets)
+//     {
+//         if (layer.contains(cubelet))
+//         {
+//             for (auto& face : cubelet.faces)
+//             {
+//                 if (face.color == color)
+//                 {
+//                     return face;
+//                 }
+//             }
+//         }
+//     }
+// }

@@ -28,6 +28,8 @@ public:
     Cube& scramble(int steps = 10);
 
     Cube& applyAlgo(const std::string& rotations);
+
+    CubeletFace& findColorOn(const Color& color, const Layer& layer);
 };
 
 const std::map<std::string, std::function<Cube&(Cube&)>> Rotation
