@@ -1,4 +1,7 @@
 #pragma once
+#include <map>
+#include <functional>
+
 #include "face.h"
 #include "layer.h"
 
@@ -27,3 +30,18 @@ public:
     Cube& applyAlgo(const std::string& rotations);
 };
 
+const std::map<std::string, std::function<Cube&(Cube&)>> Rotation
+{
+    {"F", [](Cube& c)-> Cube& { return c.rotateClockwise(frontLayer, CLOCKWISE_90); }},
+    {"B", [](Cube& c)-> Cube& { return c.rotateClockwise(backLayer, COUNTERCLOCKWISE_90); }},
+    {"L", [](Cube& c)-> Cube& { return c.rotateClockwise(leftLayer, COUNTERCLOCKWISE_90); }},
+    {"R", [](Cube& c)-> Cube& { return c.rotateClockwise(rightLayer, CLOCKWISE_90); }},
+    {"U", [](Cube& c)-> Cube& { return c.rotateClockwise(topLayer, CLOCKWISE_90); }},
+    {"D", [](Cube& c)-> Cube& { return c.rotateClockwise(bottomLayer, COUNTERCLOCKWISE_90); }},
+    {"F'", [](Cube& c)-> Cube& { return c.rotateClockwise(frontLayer, COUNTERCLOCKWISE_90); }},
+    {"B'", [](Cube& c)-> Cube& { return c.rotateClockwise(backLayer, CLOCKWISE_90); }},
+    {"L'", [](Cube& c)-> Cube& { return c.rotateClockwise(leftLayer, CLOCKWISE_90); }},
+    {"R'", [](Cube& c)-> Cube& { return c.rotateClockwise(rightLayer, COUNTERCLOCKWISE_90); }},
+    {"U'", [](Cube& c)-> Cube& { return c.rotateClockwise(topLayer, COUNTERCLOCKWISE_90); }},
+    {"D'", [](Cube& c)-> Cube& { return c.rotateClockwise(bottomLayer, CLOCKWISE_90); }}
+};
