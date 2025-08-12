@@ -29,7 +29,7 @@ public:
 
     Cube& applyAlgo(const std::string& rotations);
 
-    Orientation& findColorOn(const Color& color, const Layer& layer);
+    Cube& solveWhiteCross();
 };
 
 const std::map<std::string, std::function<Cube&(Cube&)>> Rotation

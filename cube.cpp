@@ -215,35 +215,67 @@ Cube& Cube::applyAlgo(const std::string& rotations)
     return *this;
 }
 
-Orientation& Cube::findColorOn(const Color& color, const Layer& layer)
+Cube& Cube::solveWhiteCross()
 {
     for (auto& cubelet : cubelets)
     {
-        if (layer.contains(cubelet))
+        if (frontLayer.contains(cubelet))
         {
-            auto target = cubelet.findColor(color);
-            for (auto& face : target.faces)
+            auto& target = cubelet.findColor(WHITE);
+            if (target.isCorner()) continue;
+            if (target.isEdge())
             {
-                return face.findColor(color);
+                CubeletFace white_face, another_face;
+                for (const auto& face : target.faces)
+                {
+                    if (face.color == WHITE)
+                    {
+                        white_face = face;
+                    }
+                    if (face.color != EMPTY && face.color != WHITE)
+                    {
+                        another_face = face;
+                    }
+                }
+                if (white_face.orientation == LEFT_ORIENTATED)
+                {
+                    this->applyAlgo("F");
+                }
+                if (white_face.orientation == RIGHT_ORIENTATED)
+                {
+                    this->applyAlgo("F'");
+                }
+                if (another_face.color == RED)
+                {
+                    if (another_face.orientation == FRONT_ORIENTATED)
+                    {
+                        this->applyAlgo("F F");
+                    }
+                    if (another_face.orientation == BOTTOM_ORIENTATED)
+                    {
+                        this->applyAlgo("D R F' R'");
+                    }
+                }
+                if (another_face.color)
+                {
+                }
             }
         }
     }
-    throw std::runtime_error("The target color is not found in the specified layer.");
+    return *this;
 }
 
-// CubeletFace& Cube::findColorOn(const Color& color, const Layer& layer)
+// Orientation& Cube::findColorOn(const Color& color, const Layer& layer)
 // {
 //     for (auto& cubelet : cubelets)
 //     {
 //         if (layer.contains(cubelet))
 //         {
-//             for (auto& face : cubelet.faces)
+//             for (auto target = cubelet.findColor(color); auto& face : target.faces)
 //             {
-//                 if (face.color == color)
-//                 {
-//                     return face;
-//                 }
+//                 return face.findColor(color);
 //             }
 //         }
 //     }
+//     throw std::runtime_error("The target color is not found in the specified layer.");
 // }

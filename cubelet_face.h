@@ -10,6 +10,7 @@ public:
     Orientation orientation;
 
     explicit CubeletFace(const Orientation& orientation);
+    CubeletFace();
 
     void coloring(Color color);
 

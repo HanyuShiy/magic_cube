@@ -6,6 +6,10 @@ CubeletFace::CubeletFace(const Orientation& orientation) :
 {
 }
 
+CubeletFace::CubeletFace() : color(EMPTY), orientation(DEFAULT_ORIENTATION)
+{
+}
+
 void CubeletFace::coloring(const Color color)
 {
     this->color = color;
