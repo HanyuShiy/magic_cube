@@ -28,3 +28,12 @@ void CubeletFace::rotateZClockwise(const Angle angle)
     const auto afterRotation = this->orientation.rotateZ(angle);
     this->orientation = afterRotation;
 }
+
+Orientation& CubeletFace::findColor(const Color color)
+{
+    if (this->color == color)
+    {
+        return orientation;
+    }
+    throw;
+}

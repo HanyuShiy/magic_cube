@@ -16,4 +16,6 @@ public:
     void rotateXClockwise(Angle angle);
     void rotateYClockwise(Angle angle);
     void rotateZClockwise(Angle angle);
+
+    Orientation& findColor(Color color);
 };

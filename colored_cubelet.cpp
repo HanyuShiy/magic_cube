@@ -101,6 +101,18 @@ bool ColoredCubelet::isCorner() const
     return false;
 }
 
+ColoredCubelet& ColoredCubelet::findColor(const Color color)
+{
+    for (const auto& face : faces)
+    {
+        if (face.color == color)
+        {
+            return *this;
+        }
+    }
+    throw;
+}
+
 void ColoredCubelet::rotateAround(const Orientation& axis, const Angle& angle)
 {
     if (axis == Orientation{1, 0, 0})

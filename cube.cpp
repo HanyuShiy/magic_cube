@@ -215,6 +215,22 @@ Cube& Cube::applyAlgo(const std::string& rotations)
     return *this;
 }
 
+Orientation& Cube::findColorOn(const Color& color, const Layer& layer)
+{
+    for (auto& cubelet : cubelets)
+    {
+        if (layer.contains(cubelet))
+        {
+            auto target = cubelet.findColor(color);
+            for (auto& face : target.faces)
+            {
+                return face.findColor(color);
+            }
+        }
+    }
+    throw std::runtime_error("The target color is not found in the specified layer.");
+}
+
 // CubeletFace& Cube::findColorOn(const Color& color, const Layer& layer)
 // {
 //     for (auto& cubelet : cubelets)

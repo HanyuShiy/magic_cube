@@ -29,7 +29,7 @@ public:
 
     Cube& applyAlgo(const std::string& rotations);
 
-    CubeletFace& findColorOn(const Color& color, const Layer& layer);
+    Orientation& findColorOn(const Color& color, const Layer& layer);
 };
 
 const std::map<std::string, std::function<Cube&(Cube&)>> Rotation
