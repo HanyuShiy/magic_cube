@@ -268,12 +268,93 @@ Cube& Cube::solveWhiteCross()
                 }
                 if (another_face.color == getLeft().originColor()) // leftLayer
                 {
+                    if (white_face.orientation == LEFT_ORIENTATED)
+                    {
+                        this->applyAlgo("U' F U");
+                    }
+                    if (white_face.orientation == RIGHT_ORIENTATED)
+                    {
+                        this->applyAlgo("U' F' U");
+                    }
+                    if (white_face.orientation == BOTTOM_ORIENTATED)
+                    {
+                        this->applyAlgo("D' L L");
+                    }
+                    if (white_face.orientation == FRONT_ORIENTATED)
+                    {
+                        if (another_face.orientation == LEFT_ORIENTATED)
+                        {
+                            applyAlgo("L'");
+                        }
+                        if (another_face.orientation == RIGHT_ORIENTATED)
+                        {
+                            applyAlgo("U' U' R U U");
+                        }
+                        if (another_face.orientation == BOTTOM_ORIENTATED)
+                        {
+                            applyAlgo("F L' F'");
+                        }
+                    }
                 }
                 if (another_face.color == getRight().originColor()) // rightLayer
                 {
+                    if (white_face.orientation == LEFT_ORIENTATED)
+                    {
+                        this->applyAlgo("U F U'");
+                    }
+                    if (white_face.orientation == RIGHT_ORIENTATED)
+                    {
+                        this->applyAlgo("U F' U'");
+                    }
+                    if (white_face.orientation == BOTTOM_ORIENTATED)
+                    {
+                        this->applyAlgo("D R R");
+                    }
+                    if (white_face.orientation == FRONT_ORIENTATED)
+                    {
+                        if (another_face.orientation == LEFT_ORIENTATED)
+                        {
+                            applyAlgo("U U L' U' U'");
+                        }
+                        if (another_face.orientation == RIGHT_ORIENTATED)
+                        {
+                            applyAlgo("R");
+                        }
+                        if (another_face.orientation == BOTTOM_ORIENTATED)
+                        {
+                            applyAlgo("F' R F");
+                        }
+                    }
                 }
                 if (another_face.color == getBack().originColor()) // backLayer
                 {
+                    if (white_face.orientation == LEFT_ORIENTATED)
+                    {
+                        this->applyAlgo("U U F U U");
+                    }
+                    if (white_face.orientation == RIGHT_ORIENTATED)
+                    {
+                        this->applyAlgo("U U F' U U");
+                    }
+                    if (white_face.orientation == BOTTOM_ORIENTATED)
+                    {
+                        this->applyAlgo("D D F F");
+                    }
+                    if (white_face.orientation == FRONT_ORIENTATED)
+                    {
+                        if (another_face.orientation == LEFT_ORIENTATED)
+                        {
+                            applyAlgo("U' L' U");
+                        }
+                        if (another_face.orientation == RIGHT_ORIENTATED)
+                        {
+                            applyAlgo("U R U'");
+                        }
+                        if (another_face.orientation == BOTTOM_ORIENTATED)
+                        {
+                            applyAlgo("D D B B");
+                        }
+                    }
                 }
             }
         }
