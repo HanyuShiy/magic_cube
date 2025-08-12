@@ -9,5 +9,7 @@ public:
     std::array<std::array<Color, 3>, 3> colors;
     Face(const std::array<std::array<Color, 3>, 3>& colors);
 
+    Color originColor() const;
+
     void print() const;
 };

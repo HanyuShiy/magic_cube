@@ -237,26 +237,42 @@ Cube& Cube::solveWhiteCross()
                         another_face = face;
                     }
                 }
-                if (white_face.orientation == LEFT_ORIENTATED)
+
+                if (another_face.color == getFront().originColor() && !topLayer.contains(cubelet))
                 {
-                    this->applyAlgo("F");
-                }
-                if (white_face.orientation == RIGHT_ORIENTATED)
-                {
-                    this->applyAlgo("F'");
-                }
-                if (another_face.color == RED)
-                {
-                    if (another_face.orientation == FRONT_ORIENTATED)
+                    if (white_face.orientation == LEFT_ORIENTATED)
+                    {
+                        this->applyAlgo("F");
+                    }
+                    if (white_face.orientation == RIGHT_ORIENTATED)
+                    {
+                        this->applyAlgo("F'");
+                    }
+                    if (white_face.orientation == BOTTOM_ORIENTATED)
                     {
                         this->applyAlgo("F F");
                     }
-                    if (another_face.orientation == BOTTOM_ORIENTATED)
+                    if (white_face.orientation == FRONT_ORIENTATED)
                     {
-                        this->applyAlgo("D R F' R'");
+                        if (another_face.orientation == LEFT_ORIENTATED)
+                        {
+                        }
+                        if (another_face.orientation == RIGHT_ORIENTATED)
+                        {
+                        }
+                        if (another_face.orientation == BOTTOM_ORIENTATED)
+                        {
+                            applyAlgo("D R F' R'");
+                        }
                     }
                 }
-                if (another_face.color)
+                if (another_face.color == getLeft().originColor()) // leftLayer
+                {
+                }
+                if (another_face.color == getRight().originColor()) // rightLayer
+                {
+                }
+                if (another_face.color == getBack().originColor()) // backLayer
                 {
                 }
             }
