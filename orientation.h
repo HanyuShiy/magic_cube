@@ -22,3 +22,4 @@ const auto TOP_ORIENTATED = Orientation{0, 0, 1};
 const auto BOTTOM_ORIENTATED = Orientation{0, 0, -1};
 const auto LEFT_ORIENTATED = Orientation{0, -1, 0};
 const auto RIGHT_ORIENTATED = Orientation{0, 1, 0};
+const auto DEFAULT_ORIENTATION = Orientation(0, 0, 0);

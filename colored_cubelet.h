@@ -21,6 +21,10 @@ public:
     void rotateXClockwise(Angle angle) override;
     void rotateYClockwise(Angle angle) override;
     void rotateZClockwise(Angle angle) override;
-
     void rotateAround(const Orientation& axis, const Angle& angle);
+
+    bool isEdge() const;
+    bool isCorner() const;
+
+    ColoredCubelet& findColor(Color color);
 };

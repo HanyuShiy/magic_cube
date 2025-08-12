@@ -1,7 +1,7 @@
 #include "face.h"
 #include <iostream>
 
-Face::Face(const std::array<std::array<Color, 3>, 3>& colors) : colors(colors)
+Face::Face(const std::array<std::array<Color, 3>, 3>& colors): colors(colors)
 {
 }
 
@@ -19,6 +19,11 @@ bool Face::isSingleColor() const
         }
     }
     return true;
+}
+
+Color Face::originColor() const
+{
+    return this->colors[1][1];
 }
 
 void Face::print() const

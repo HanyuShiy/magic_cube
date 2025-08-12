@@ -1,6 +1,4 @@
 #pragma once
-#include <array>
-
 #include "color.h"
 #include "orientation.h"
 
@@ -12,6 +10,7 @@ public:
     Orientation orientation;
 
     explicit CubeletFace(const Orientation& orientation);
+    CubeletFace();
 
     void coloring(Color color);
 
@@ -19,5 +18,5 @@ public:
     void rotateYClockwise(Angle angle);
     void rotateZClockwise(Angle angle);
 
-
+    Orientation& findColor(Color color);
 };

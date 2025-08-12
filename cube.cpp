@@ -2,8 +2,10 @@
 
 #include <iostream>
 #include <random>
+#include <sstream>
 
 #include "layer.h"
+#include "rotation.h"
 
 Cube::Cube() : cubelets{
     ColoredCubelet(1, 1, 1),
@@ -46,27 +48,27 @@ void Cube::coloring()
     {
         if (frontLayer.contains(cubelet))
         {
-            cubelet.coloring(FRONT_ORIENTATED, Color::RED);
+            cubelet.coloring(FRONT_ORIENTATED, RED);
         }
         if (backLayer.contains(cubelet))
         {
-            cubelet.coloring(BACK_ORIENTATED, Color::ORANGE);
+            cubelet.coloring(BACK_ORIENTATED, ORANGE);
         }
         if (topLayer.contains(cubelet))
         {
-            cubelet.coloring(TOP_ORIENTATED, Color::WHITE);
+            cubelet.coloring(TOP_ORIENTATED, WHITE);
         }
         if (bottomLayer.contains(cubelet))
         {
-            cubelet.coloring(BOTTOM_ORIENTATED, Color::YELLOW);
+            cubelet.coloring(BOTTOM_ORIENTATED, YELLOW);
         }
         if (leftLayer.contains(cubelet))
         {
-            cubelet.coloring(LEFT_ORIENTATED, Color::GREEN);
+            cubelet.coloring(LEFT_ORIENTATED, GREEN);
         }
         if (rightLayer.contains(cubelet))
         {
-            cubelet.coloring(RIGHT_ORIENTATED, Color::BLUE);
+            cubelet.coloring(RIGHT_ORIENTATED, BLUE);
         }
     }
 }
@@ -149,132 +151,6 @@ Face Cube::getBottom()
     return {bottomFace};
 }
 
-ColoredCubelet& Cube::getCubeletAt(const Position position)
-{
-    for (auto& cubelet : cubelets)
-    {
-        if (cubelet.position == position)
-        {
-            return cubelet;
-        }
-    }
-    throw;
-}
-
-void Cube::swapTopEdges()
-{
-    this->rotateClockwise(rightLayer, CLOCKWISE_90)
-        .rotateClockwise(topLayer, CLOCKWISE_90)
-        .rotateClockwise(rightLayer, COUNTERCLOCKWISE_90)
-        .rotateClockwise(topLayer, CLOCKWISE_90)
-        .rotateClockwise(rightLayer, CLOCKWISE_90)
-        .rotateClockwise(topLayer, CLOCKWISE_90, 2)
-        .rotateClockwise(rightLayer, COUNTERCLOCKWISE_90)
-        .rotateClockwise(topLayer, CLOCKWISE_90);
-}
-
-// Position& Cube::findColorOn(const Color color, const Layer& layer, const Orientation& orientation)
-// {
-//     for (auto& cubelet : cubelets)
-//     {
-//         if (layer.contains(cubelet))
-//         {
-//             for (auto& face : cubelet.faces)
-//             {
-//                 if (face.orientation == orientation && face.color == color)
-//                 {
-//                     return cubelet.position;
-//                 }
-//             }
-//         }
-//     }
-//     throw std::invalid_argument("No target color in the given orientation on the given layer!");
-// }
-
-Cube& Cube::resetZ0Layer(const Orientation& orientation) // the bottom face is already reset
-{
-    const ColoredCubelet& target = getCubeletAt({1, 0, 0});
-    while (target.getFaceOn(orientation)
-        != getCubeletAt({1, 0, -1}).getFaceOn(orientation))
-    {
-        rotateClockwise(bottomLayer, CLOCKWISE_90);
-    }
-    while (target.getFaceOn(orientation)
-        != getCubeletAt({1, 0, 0}).getFaceOn(orientation))
-    {
-        rotateClockwise(topLayer, CLOCKWISE_90);
-    }
-    if (getCubeletAt({1, 0, 1}).getFaceOn(TOP_ORIENTATED)
-        == getCubeletAt({0, 1, 0}).getFaceOn(RIGHT_ORIENTATED))
-    // the operand should move to the right
-    {
-        // center layer algo (right)
-        this->rotateClockwise(topLayer, CLOCKWISE_90)
-            .rotateClockwise(rightLayer, CLOCKWISE_90)
-            .rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
-            .rotateClockwise(rightLayer, COUNTERCLOCKWISE_90)
-            .rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
-            .rotateClockwise(frontLayer, COUNTERCLOCKWISE_90)
-            .rotateClockwise(topLayer, CLOCKWISE_90)
-            .rotateClockwise(frontLayer, CLOCKWISE_90);
-    }
-
-    if (getCubeletAt({1, 0, 1}).getFaceOn(TOP_ORIENTATED)
-        == getCubeletAt({0, -1, 0}).getFaceOn(LEFT_ORIENTATED))
-    // the operand should move to the left
-    {
-        // center layer algo (left)
-        this->rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
-            .rotateClockwise(leftLayer, CLOCKWISE_90)
-            .rotateClockwise(topLayer, CLOCKWISE_90)
-            .rotateClockwise(leftLayer, COUNTERCLOCKWISE_90)
-            .rotateClockwise(topLayer, CLOCKWISE_90)
-            .rotateClockwise(frontLayer, CLOCKWISE_90)
-            .rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
-            .rotateClockwise(frontLayer, COUNTERCLOCKWISE_90);
-    }
-    return *this;
-}
-
-
-Cube& Cube::resetZ1Layer() // the bottomLayer & z0Layer is already reset
-{
-    const Color target_color = getCubeletAt({0, 0, 1}).getFaceOn(TOP_ORIENTATED);
-    while (!(getCubeletAt({1, 0, 1}).getFaceOn(TOP_ORIENTATED) == target_color
-            && getCubeletAt({0, -1, 1}).getFaceOn(TOP_ORIENTATED) == target_color
-            && getCubeletAt({-1, 0, 1}).getFaceOn(TOP_ORIENTATED) == target_color)
-        && getCubeletAt({0, 1, 1}).getFaceOn(TOP_ORIENTATED) == target_color)
-    {
-        // top cross algo
-        rotateClockwise(frontLayer, CLOCKWISE_90)
-            .rotateClockwise(rightLayer, CLOCKWISE_90)
-            .rotateClockwise(topLayer, CLOCKWISE_90)
-            .rotateClockwise(rightLayer, COUNTERCLOCKWISE_90)
-            .rotateClockwise(topLayer, COUNTERCLOCKWISE_90)
-            .rotateClockwise(frontLayer, COUNTERCLOCKWISE_90);
-    }
-    // Now the topLayer is a crossing like `+`
-
-    ColoredCubelet& operand_front = getCubeletAt({1, 0, 1});
-    ColoredCubelet& operand_left = getCubeletAt({0, -1, 1});
-    const Color frontColor = getCubeletAt({1, 0, 0}).getFaceOn(FRONT_ORIENTATED);
-    while (!(operand_front.getFaceOn(FRONT_ORIENTATED)
-            == getCubeletAt({0, -1, 0}).getFaceOn(LEFT_ORIENTATED)
-        && operand_left.getFaceOn(LEFT_ORIENTATED)
-            == getCubeletAt({1, 0, 0}).getFaceOn(FRONT_ORIENTATED)))
-
-    {
-        rotateClockwise(topLayer, CLOCKWISE_90);
-    }    // make preparation for swaping edges
-    swapTopEdges();
-
-    // Now only yellow corners are left
-
-
-
-    return *this;
-}
-
 Cube& Cube::rotateClockwise(const Layer& layer, const Angle& angle, const int steps)
 {
     // Rotate the given layer clockwise around its axis.
@@ -319,7 +195,169 @@ Cube& Cube::scramble(const int steps)
     std::default_random_engine e(time(nullptr));
     for (size_t i = 0; i < steps; ++i)
     {
-        this->rotateDegreeClockwise(layers[dist1(e)], angles[dist2(e)]);
+        this->rotateClockwise(layers[dist1(e)], angles[dist2(e)]);
+    }
+    return *this;
+}
+
+Cube& Cube::applyAlgo(const std::string& rotations)
+// Accepted rotations must be a sequence of basic rotations, each separated by spaces.
+{
+    std::istringstream iss(rotations);
+    std::string token;
+    while (iss >> token)
+    {
+        if (auto rot = Rotation.find(token); rot != Rotation.end())
+        {
+            rot->second(*this);
+        }
+    }
+    return *this;
+}
+
+Cube& Cube::solveWhiteCross()
+{
+    for (auto& cubelet : cubelets)
+    {
+        if (frontLayer.contains(cubelet))
+        {
+            auto& target = cubelet.findColor(WHITE);
+            if (target.isCorner()) continue;
+            if (target.isEdge())
+            {
+                CubeletFace white_face, another_face;
+                for (const auto& face : target.faces)
+                {
+                    if (face.color == WHITE)
+                    {
+                        white_face = face;
+                    }
+                    if (face.color != EMPTY && face.color != WHITE)
+                    {
+                        another_face = face;
+                    }
+                }
+
+                if (another_face.color == getFront().originColor() && !topLayer.contains(cubelet))
+                {
+                    if (white_face.orientation == LEFT_ORIENTATED)
+                    {
+                        this->applyAlgo("F");
+                    }
+                    if (white_face.orientation == RIGHT_ORIENTATED)
+                    {
+                        this->applyAlgo("F'");
+                    }
+                    if (white_face.orientation == BOTTOM_ORIENTATED)
+                    {
+                        this->applyAlgo("F F");
+                    }
+                    if (white_face.orientation == FRONT_ORIENTATED)
+                    {
+                        if (another_face.orientation == LEFT_ORIENTATED)
+                        {
+                        }
+                        if (another_face.orientation == RIGHT_ORIENTATED)
+                        {
+                        }
+                        if (another_face.orientation == BOTTOM_ORIENTATED)
+                        {
+                            applyAlgo("D R F' R'");
+                        }
+                    }
+                }
+                if (another_face.color == getLeft().originColor()) // leftLayer
+                {
+                    if (white_face.orientation == LEFT_ORIENTATED)
+                    {
+                        this->applyAlgo("U' F U");
+                    }
+                    if (white_face.orientation == RIGHT_ORIENTATED)
+                    {
+                        this->applyAlgo("U' F' U");
+                    }
+                    if (white_face.orientation == BOTTOM_ORIENTATED)
+                    {
+                        this->applyAlgo("D' L L");
+                    }
+                    if (white_face.orientation == FRONT_ORIENTATED)
+                    {
+                        if (another_face.orientation == LEFT_ORIENTATED)
+                        {
+                            applyAlgo("L'");
+                        }
+                        if (another_face.orientation == RIGHT_ORIENTATED)
+                        {
+                            applyAlgo("U' U' R U U");
+                        }
+                        if (another_face.orientation == BOTTOM_ORIENTATED)
+                        {
+                            applyAlgo("F L' F'");
+                        }
+                    }
+                }
+                if (another_face.color == getRight().originColor()) // rightLayer
+                {
+                    if (white_face.orientation == LEFT_ORIENTATED)
+                    {
+                        this->applyAlgo("U F U'");
+                    }
+                    if (white_face.orientation == RIGHT_ORIENTATED)
+                    {
+                        this->applyAlgo("U F' U'");
+                    }
+                    if (white_face.orientation == BOTTOM_ORIENTATED)
+                    {
+                        this->applyAlgo("D R R");
+                    }
+                    if (white_face.orientation == FRONT_ORIENTATED)
+                    {
+                        if (another_face.orientation == LEFT_ORIENTATED)
+                        {
+                            applyAlgo("U U L' U' U'");
+                        }
+                        if (another_face.orientation == RIGHT_ORIENTATED)
+                        {
+                            applyAlgo("R");
+                        }
+                        if (another_face.orientation == BOTTOM_ORIENTATED)
+                        {
+                            applyAlgo("F' R F");
+                        }
+                    }
+                }
+                if (another_face.color == getBack().originColor()) // backLayer
+                {
+                    if (white_face.orientation == LEFT_ORIENTATED)
+                    {
+                        this->applyAlgo("U U F U U");
+                    }
+                    if (white_face.orientation == RIGHT_ORIENTATED)
+                    {
+                        this->applyAlgo("U U F' U U");
+                    }
+                    if (white_face.orientation == BOTTOM_ORIENTATED)
+                    {
+                        this->applyAlgo("D D F F");
+                    }
+                    if (white_face.orientation == FRONT_ORIENTATED)
+                    {
+                        if (another_face.orientation == LEFT_ORIENTATED)
+                        {
+                            applyAlgo("U' L' U");
+                        }
+                        if (another_face.orientation == RIGHT_ORIENTATED)
+                        {
+                            applyAlgo("U R U'");
+                        }
+                        if (another_face.orientation == BOTTOM_ORIENTATED)
+                        {
+                            applyAlgo("D D B B");
+                        }
+                    }
+                }
+            }
+        }
     }
     return *this;
 }

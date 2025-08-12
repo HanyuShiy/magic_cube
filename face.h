@@ -11,5 +11,7 @@ public:
 
     [[nodiscard]] bool isSingleColor() const;
 
+    Color originColor() const;
+
     void print() const;
 };

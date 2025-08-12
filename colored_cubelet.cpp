@@ -67,6 +67,52 @@ void ColoredCubelet::rotateZClockwise(const Angle angle)
     }
 }
 
+bool ColoredCubelet::isEdge() const
+{
+    int i = 0;
+    for (const auto& face : faces)
+    {
+        if (face.color != EMPTY)
+        {
+            i++;
+        }
+    }
+    if (i == 2)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool ColoredCubelet::isCorner() const
+{
+    int i = 0;
+    for (const auto& face : faces)
+    {
+        if (face.color != EMPTY)
+        {
+            i++;
+        }
+    }
+    if (i == 3)
+    {
+        return true;
+    }
+    return false;
+}
+
+ColoredCubelet& ColoredCubelet::findColor(const Color color)
+{
+    for (const auto& face : faces)
+    {
+        if (face.color == color)
+        {
+            return *this;
+        }
+    }
+    throw;
+}
+
 void ColoredCubelet::rotateAround(const Orientation& axis, const Angle& angle)
 {
     if (axis == Orientation{1, 0, 0})

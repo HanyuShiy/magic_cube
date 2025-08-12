@@ -8,9 +8,7 @@ int main()
     // std::cout << "bottom face before rotation:\n";
     // bottom.print();
 
-    cube.scramble(15);
-    cube.resetZ0Layer(FRONT_ORIENTATED).resetZ1Layer();
-
+    cube.applyAlgo("U R");
 
     std::cout << "bottom face after rotation:\n";
     cube.getBottom().print();
