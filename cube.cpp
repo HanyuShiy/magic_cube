@@ -185,12 +185,13 @@ Cube& Cube::rotateDegreeClockwise(const Layer& layer, const Angle& angle)
 Cube& Cube::scramble(const int steps)
 {
     const std::array layers{
-        frontLayer, backLayer, topLayer, bottomLayer, rightLayer, leftLayer, x0Layer, y0Layer, z0Layer
+        frontLayer, backLayer, topLayer, bottomLayer, rightLayer, leftLayer
+        // , x0Layer, y0Layer, z0Layer
     };
     const std::array angles{
         CLOCKWISE_90, COUNTERCLOCKWISE_90, HALF_ROUND
     };
-    std::uniform_int_distribution dist1(0, 8);
+    std::uniform_int_distribution dist1(0, 5);
     std::uniform_int_distribution dist2(0, 2);
     std::default_random_engine e(time(nullptr));
     for (size_t i = 0; i < steps; ++i)
@@ -215,148 +216,151 @@ Cube& Cube::applyAlgo(const std::string& rotations)
     return *this;
 }
 
-Cube& Cube::solveWhiteCross()
+Cube& Cube::solveWhiteCross() // wip: only white-edge pieces on the frontLayer have been solved
 {
     for (auto& cubelet : cubelets)
     {
         if (frontLayer.contains(cubelet))
         {
-            auto& target = cubelet.findColor(WHITE);
-            if (target.isCorner()) continue;
-            if (target.isEdge())
+            if (const auto* target = cubelet.findColor(WHITE))
             {
-                CubeletFace white_face, another_face;
-                for (const auto& face : target.faces)
+                if (target->isCorner()) continue;
+                if (target->isEdge())
                 {
-                    if (face.color == WHITE)
+                    CubeletFace white_face, another_face;
+                    for (const auto& face : target->faces)
                     {
-                        white_face = face;
+                        if (face.color == WHITE)
+                        {
+                            white_face = face;
+                        }
+                        if (face.color != EMPTY && face.color != WHITE)
+                        {
+                            another_face = face;
+                        }
                     }
-                    if (face.color != EMPTY && face.color != WHITE)
-                    {
-                        another_face = face;
-                    }
-                }
 
-                if (another_face.color == getFront().originColor() && !topLayer.contains(cubelet))
-                {
-                    if (white_face.orientation == LEFT_ORIENTATED)
+                    if (another_face.color == getFront().originColor() && !topLayer.contains(cubelet))
                     {
-                        this->applyAlgo("F");
-                    }
-                    if (white_face.orientation == RIGHT_ORIENTATED)
-                    {
-                        this->applyAlgo("F'");
-                    }
-                    if (white_face.orientation == BOTTOM_ORIENTATED)
-                    {
-                        this->applyAlgo("F F");
-                    }
-                    if (white_face.orientation == FRONT_ORIENTATED)
-                    {
-                        if (another_face.orientation == LEFT_ORIENTATED)
+                        if (white_face.orientation == LEFT_ORIENTATED)
                         {
+                            this->applyAlgo("F");
                         }
-                        if (another_face.orientation == RIGHT_ORIENTATED)
+                        if (white_face.orientation == RIGHT_ORIENTATED)
                         {
+                            this->applyAlgo("F'");
                         }
-                        if (another_face.orientation == BOTTOM_ORIENTATED)
+                        if (white_face.orientation == BOTTOM_ORIENTATED)
                         {
-                            applyAlgo("D R F' R'");
+                            this->applyAlgo("F F");
                         }
-                    }
-                }
-                if (another_face.color == getLeft().originColor()) // leftLayer
-                {
-                    if (white_face.orientation == LEFT_ORIENTATED)
-                    {
-                        this->applyAlgo("U' F U");
-                    }
-                    if (white_face.orientation == RIGHT_ORIENTATED)
-                    {
-                        this->applyAlgo("U' F' U");
-                    }
-                    if (white_face.orientation == BOTTOM_ORIENTATED)
-                    {
-                        this->applyAlgo("D' L L");
-                    }
-                    if (white_face.orientation == FRONT_ORIENTATED)
-                    {
-                        if (another_face.orientation == LEFT_ORIENTATED)
+                        if (white_face.orientation == FRONT_ORIENTATED)
                         {
-                            applyAlgo("L'");
-                        }
-                        if (another_face.orientation == RIGHT_ORIENTATED)
-                        {
-                            applyAlgo("U' U' R U U");
-                        }
-                        if (another_face.orientation == BOTTOM_ORIENTATED)
-                        {
-                            applyAlgo("F L' F'");
+                            if (another_face.orientation == LEFT_ORIENTATED)
+                            {
+                            }
+                            if (another_face.orientation == RIGHT_ORIENTATED)
+                            {
+                            }
+                            if (another_face.orientation == BOTTOM_ORIENTATED)
+                            {
+                                applyAlgo("D R F' R'");
+                            }
                         }
                     }
-                }
-                if (another_face.color == getRight().originColor()) // rightLayer
-                {
-                    if (white_face.orientation == LEFT_ORIENTATED)
+                    if (another_face.color == getLeft().originColor()) // leftLayer
                     {
-                        this->applyAlgo("U F U'");
-                    }
-                    if (white_face.orientation == RIGHT_ORIENTATED)
-                    {
-                        this->applyAlgo("U F' U'");
-                    }
-                    if (white_face.orientation == BOTTOM_ORIENTATED)
-                    {
-                        this->applyAlgo("D R R");
-                    }
-                    if (white_face.orientation == FRONT_ORIENTATED)
-                    {
-                        if (another_face.orientation == LEFT_ORIENTATED)
+                        if (white_face.orientation == LEFT_ORIENTATED)
                         {
-                            applyAlgo("U U L' U' U'");
+                            this->applyAlgo("U' F U");
                         }
-                        if (another_face.orientation == RIGHT_ORIENTATED)
+                        if (white_face.orientation == RIGHT_ORIENTATED)
                         {
-                            applyAlgo("R");
+                            this->applyAlgo("U' F' U");
                         }
-                        if (another_face.orientation == BOTTOM_ORIENTATED)
+                        if (white_face.orientation == BOTTOM_ORIENTATED)
                         {
-                            applyAlgo("F' R F");
+                            this->applyAlgo("D' L L");
+                        }
+                        if (white_face.orientation == FRONT_ORIENTATED)
+                        {
+                            if (another_face.orientation == LEFT_ORIENTATED)
+                            {
+                                applyAlgo("L'");
+                            }
+                            if (another_face.orientation == RIGHT_ORIENTATED)
+                            {
+                                applyAlgo("U' U' R U U");
+                            }
+                            if (another_face.orientation == BOTTOM_ORIENTATED)
+                            {
+                                applyAlgo("F L' F'");
+                            }
                         }
                     }
-                }
-                if (another_face.color == getBack().originColor()) // backLayer
-                {
-                    if (white_face.orientation == LEFT_ORIENTATED)
+                    if (another_face.color == getRight().originColor()) // rightLayer
                     {
-                        this->applyAlgo("U U F U U");
-                    }
-                    if (white_face.orientation == RIGHT_ORIENTATED)
-                    {
-                        this->applyAlgo("U U F' U U");
-                    }
-                    if (white_face.orientation == BOTTOM_ORIENTATED)
-                    {
-                        this->applyAlgo("D D F F");
-                    }
-                    if (white_face.orientation == FRONT_ORIENTATED)
-                    {
-                        if (another_face.orientation == LEFT_ORIENTATED)
+                        if (white_face.orientation == LEFT_ORIENTATED)
                         {
-                            applyAlgo("U' L' U");
+                            this->applyAlgo("U F U'");
                         }
-                        if (another_face.orientation == RIGHT_ORIENTATED)
+                        if (white_face.orientation == RIGHT_ORIENTATED)
                         {
-                            applyAlgo("U R U'");
+                            this->applyAlgo("U F' U'");
                         }
-                        if (another_face.orientation == BOTTOM_ORIENTATED)
+                        if (white_face.orientation == BOTTOM_ORIENTATED)
                         {
-                            applyAlgo("D D B B");
+                            this->applyAlgo("D R R");
+                        }
+                        if (white_face.orientation == FRONT_ORIENTATED)
+                        {
+                            if (another_face.orientation == LEFT_ORIENTATED)
+                            {
+                                applyAlgo("U U L' U' U'");
+                            }
+                            if (another_face.orientation == RIGHT_ORIENTATED)
+                            {
+                                applyAlgo("R");
+                            }
+                            if (another_face.orientation == BOTTOM_ORIENTATED)
+                            {
+                                applyAlgo("F' R F");
+                            }
+                        }
+                    }
+                    if (another_face.color == getBack().originColor()) // backLayer
+                    {
+                        if (white_face.orientation == LEFT_ORIENTATED)
+                        {
+                            this->applyAlgo("U U F U U");
+                        }
+                        if (white_face.orientation == RIGHT_ORIENTATED)
+                        {
+                            this->applyAlgo("U U F' U U");
+                        }
+                        if (white_face.orientation == BOTTOM_ORIENTATED)
+                        {
+                            this->applyAlgo("D D F F");
+                        }
+                        if (white_face.orientation == FRONT_ORIENTATED)
+                        {
+                            if (another_face.orientation == LEFT_ORIENTATED)
+                            {
+                                applyAlgo("U' L' U");
+                            }
+                            if (another_face.orientation == RIGHT_ORIENTATED)
+                            {
+                                applyAlgo("U R U'");
+                            }
+                            if (another_face.orientation == BOTTOM_ORIENTATED)
+                            {
+                                applyAlgo("D D B B");
+                            }
                         }
                     }
                 }
             }
+            else {continue;}
         }
     }
     return *this;

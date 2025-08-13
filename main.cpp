@@ -8,7 +8,8 @@ int main()
     // std::cout << "bottom face before rotation:\n";
     // bottom.print();
 
-    cube.applyAlgo("U R");
+    cube.scramble();
+    cube.solveWhiteCross();
 
     std::cout << "bottom face after rotation:\n";
     cube.getBottom().print();

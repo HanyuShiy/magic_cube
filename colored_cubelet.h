@@ -26,5 +26,5 @@ public:
     bool isEdge() const;
     bool isCorner() const;
 
-    ColoredCubelet& findColor(Color color);
+    ColoredCubelet* findColor(Color color);
 };
