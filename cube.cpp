@@ -83,7 +83,7 @@ Face Cube::getFront()
             frontFace[cubelet.position.y + 1][cubelet.position.z + 1] = cubelet.getFaceOn(FRONT_ORIENTATED);
         }
     }
-    return {frontFace};
+    return Face(frontFace);
 }
 
 Face Cube::getBack()
@@ -96,7 +96,7 @@ Face Cube::getBack()
             backFace[cubelet.position.y + 1][cubelet.position.z + 1] = cubelet.getFaceOn(BACK_ORIENTATED);
         }
     }
-    return {backFace};
+    return Face(backFace);
 }
 
 Face Cube::getLeft()
@@ -109,7 +109,7 @@ Face Cube::getLeft()
             leftFace[cubelet.position.z + 1][cubelet.position.x + 1] = cubelet.getFaceOn(LEFT_ORIENTATED);
         }
     }
-    return {leftFace};
+    return Face(leftFace);
 }
 
 Face Cube::getRight()
@@ -122,7 +122,7 @@ Face Cube::getRight()
             rightFace[cubelet.position.x + 1][cubelet.position.z + 1] = cubelet.getFaceOn(RIGHT_ORIENTATED);
         }
     }
-    return {rightFace};
+    return Face(rightFace);
 }
 
 Face Cube::getTop()
@@ -135,7 +135,7 @@ Face Cube::getTop()
             topFace[cubelet.position.x + 1][cubelet.position.y + 1] = cubelet.getFaceOn(TOP_ORIENTATED);
         }
     }
-    return {topFace};
+    return Face(topFace);
 }
 
 Face Cube::getBottom()
@@ -148,7 +148,7 @@ Face Cube::getBottom()
             bottomFace[cubelet.position.x + 1][cubelet.position.y + 1] = cubelet.getFaceOn(BOTTOM_ORIENTATED);
         }
     }
-    return {bottomFace};
+    return Face(bottomFace);
 }
 
 Cube& Cube::rotateClockwise(const Layer& layer, const Angle& angle, const int steps)

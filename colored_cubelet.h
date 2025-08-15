@@ -23,8 +23,8 @@ public:
     void rotateZClockwise(Angle angle) override;
     void rotateAround(const Orientation& axis, const Angle& angle);
 
-    bool isEdge() const;
-    bool isCorner() const;
+    [[nodiscard]] bool isEdge() const;
+    [[nodiscard]] bool isCorner() const;
 
     ColoredCubelet* findColor(Color color);
 };

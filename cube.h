@@ -32,7 +32,7 @@ public:
     // Cube& solveWhiteCross();
 };
 
-const std::map<std::string, std::function<Cube&(Cube&)>> Rotation
+inline const std::map<std::string, std::function<Cube&(Cube&)>> Rotation
 {
     {"F", [](Cube& c)-> Cube& { return c.rotateClockwise(frontLayer, CLOCKWISE_90); }},
     {"B", [](Cube& c)-> Cube& { return c.rotateClockwise(backLayer, COUNTERCLOCKWISE_90); }},

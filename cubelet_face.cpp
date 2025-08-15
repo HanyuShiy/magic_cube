@@ -10,9 +10,9 @@ CubeletFace::CubeletFace() : color(EMPTY), orientation(DEFAULT_ORIENTATION)
 {
 }
 
-void CubeletFace::coloring(const Color color)
+void CubeletFace::coloring(const Color c)
 {
-    this->color = color;
+    this->color = c;
 }
 
 void CubeletFace::rotateXClockwise(const Angle angle)
@@ -33,9 +33,9 @@ void CubeletFace::rotateZClockwise(const Angle angle)
     this->orientation = afterRotation;
 }
 
-Orientation& CubeletFace::findColor(const Color color)
+Orientation& CubeletFace::findColor(const Color c)
 {
-    if (this->color == color)
+    if (this->color == c)
     {
         return orientation;
     }

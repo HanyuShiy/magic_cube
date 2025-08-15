@@ -17,12 +17,13 @@ private:
     Orientation axis;
 };
 
-extern const Layer frontLayer;
-extern const Layer backLayer;
-extern const Layer rightLayer;
-extern const Layer leftLayer;
-extern const Layer topLayer;
-extern const Layer bottomLayer;
-extern const Layer x0Layer;
-extern const Layer y0Layer;
-extern const Layer z0Layer;
+inline const Layer frontLayer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.x == 1; }, {1, 0, 0});
+inline const Layer backLayer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.x == -1; }, {1, 0, 0});
+inline const Layer rightLayer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.y == 1; }, {0, 1, 0});
+inline const Layer leftLayer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.y == -1; }, {0, 1, 0});
+inline const Layer topLayer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.z == 1; }, {0, 0, 1});
+inline const Layer bottomLayer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.z == -1; }, {0, 0, 1});
+inline const Layer x0Layer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.x == 0; }, {1, 0, 0});
+inline const Layer y0Layer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.y == 0; }, {0, 1, 0});
+inline const Layer z0Layer([](const ColoredCubelet& cubelet)-> bool { return cubelet.position.z == 0; }, {0, 0, 1});
+

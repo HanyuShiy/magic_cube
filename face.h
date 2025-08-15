@@ -7,11 +7,11 @@ class Face
 {
 public:
     std::array<std::array<Color, 3>, 3> colors;
-    Face(const std::array<std::array<Color, 3>, 3>& colors);
+    explicit Face(const std::array<std::array<Color, 3>, 3>& colors);
 
     [[nodiscard]] bool isSingleColor() const;
 
-    Color originColor() const;
+    [[nodiscard]] Color originColor() const;
 
     void print() const;
 };
